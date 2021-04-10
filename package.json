@@ -1,0 +1,37 @@
+{
+  "name": "random-seedable",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/index.js",
+    "coverage": "nyc mocha test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisAkroyd/random-seedable.git"
+  },
+  "author": "Chris Akroyd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChrisAkroyd/random-seedable/issues"
+  },
+  "homepage": "https://github.com/ChrisAkroyd/random-seedable#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "lodash": "^4.17.21",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "src/*.js"
+  ]
+}
