@@ -4,12 +4,13 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "type": "module",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/index.js",
-    "coverage": "nyc mocha test/index.js"
+    "test": "mocha test/*.js",
+    "coverage": "nyc mocha test/*.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,7 @@
     "url": "https://github.com/ChrisAkroyd/random-seedable/issues"
   },
   "homepage": "https://github.com/ChrisAkroyd/random-seedable#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "^4.3.4",
     "lodash": "^4.17.21",
