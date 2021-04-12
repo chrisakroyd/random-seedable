@@ -4,10 +4,11 @@
 
 using namespace std;
 
+// https://en.wikipedia.org/wiki/Linear_congruential_generator
+
 struct lgc_state {
     uint32_t x, a, c, m;
 };
-
 
 uint32_t lgc(lgc_state& state) {
     uint32_t x = (state.a * state.x + state.c) % state.m;

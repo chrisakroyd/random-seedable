@@ -3,10 +3,11 @@
 
 using namespace std;
 
+// https://en.wikipedia.org/wiki/Xorshift#xorwow
+
 struct xor_state {
     uint32_t x, y, z, w, v, d;
 };
-
 
 uint32_t xorwow_32(xor_state& state) {
     uint32_t t = state.x;

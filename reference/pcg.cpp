@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// https://en.wikipedia.org/wiki/Permuted_congruential_generator
+
 struct pcg_state {
     uint64_t x, mul, inc;
 };

@@ -3,10 +3,11 @@
 
 using namespace std;
 
+// https://en.wikipedia.org/wiki/Xorshift
+
 struct xor_state {
     uint32_t x, a, b, c;
 };
-
 
 uint32_t xor_shift_32(xor_state& state) {
     uint32_t x = state.x;
