@@ -7,6 +7,9 @@ const expect = chai.expect;
 const seed = 1234;
 const testData = [3067928073, 889114580, 3219257635, 1486326822, 3450746189, 1275680328, 1045497095,
   742129338, 1126366929, 2032544252];
+const numDraws = 2500;
+const upperBound = 25;
+const lowerBound = 10;
 
 describe('Seeded 32 bit lcg generator to produce exact number sequence.', () => {
   const random = new LCG(seed);
@@ -14,5 +17,34 @@ describe('Seeded 32 bit lcg generator to produce exact number sequence.', () => 
     it(`Expect number ${index} to equal ${expectedNumber}`, () => {
       expect(random.int()).to.equal(expectedNumber);
     });
+  });
+});
+
+describe('32 bit lcg generator produces ints within bounds', () => {
+  const random = new LCG(seed);
+  it(`Expect ${numDraws} calls of boundedInt() to produce ints within the range ${lowerBound} - ${upperBound}`, () => {
+    for (let i = 0; i < numDraws; i++) {
+      const randNum = random.boundedInt(lowerBound, upperBound);
+      expect(randNum).to.be.greaterThanOrEqual(lowerBound);
+      expect(randNum).to.be.lessThanOrEqual(upperBound);
+    }
+  });
+
+  it(`Expect ${numDraws} calls of int() to produce ints less than maximum (${random.max})`, () => {
+    for (let i = 0; i < numDraws; i++) {
+      const randNum = random.int();
+      expect(randNum).to.be.lessThanOrEqual(random.max);
+    }
+  });
+});
+
+describe('32 bit lcg generator produces floats.', () => {
+  const random = new LCG(seed);
+  it(`Expect ${numDraws} calls of float() to produce floats within the range 0.0 - 1.0`, () => {
+    for (let i = 0; i < numDraws; i++) {
+      const randNum = random.float();
+      expect(randNum).to.be.greaterThanOrEqual(0.0);
+      expect(randNum).to.be.lessThanOrEqual(1.0);
+    }
   });
 });
