@@ -19,6 +19,10 @@ class LCG extends PseudoRandomGenerator {
     }
   }
 
+  reset() {
+
+  }
+
   set seed(seed) {
     this.orig = seed;
     this.x = this.orig;
@@ -42,14 +46,15 @@ class LCG extends PseudoRandomGenerator {
     // https://docs.oracle.com/javase/6/docs/api/java/util/Random.html#nextInt%28int%29
     // https://peteroupc.github.io/randomnotes.html
     // https://www.pcg-random.org/posts/bounded-rands.html
-    let t = 2 ** 32 % max;
+    const range = max - min;
+    const t = (2 ** 32) % range
     let r = this.int();
 
     while (r < t) {
       r = this.int();
     }
 
-    return min + (r % max);
+    return min + (r % range);
   }
 }
 
