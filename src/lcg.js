@@ -1,6 +1,6 @@
-import PseudoRandomGenerator from './pseudoRandomGenerator.js';
+import PRNG from './PRNG.js';
 
-class LCG extends PseudoRandomGenerator {
+class LCG extends PRNG {
   constructor(seed, a = 1664525, c = 1013904223, m = 4294967296) {
     super();
     this.orig = seed;
@@ -8,19 +8,7 @@ class LCG extends PseudoRandomGenerator {
     this.a = a;
     this.c = c;
     this.m = m;
-    this.max = m - 1;
     [seed, a, c, m].forEach(num => this.checkNum(num));
-  }
-
-  checkNum(num) {
-    // 32bit only.
-    if (num > 2 ** 32) {
-      throw new Error('Too large error.');
-    }
-  }
-
-  reset() {
-
   }
 
   set seed(seed) {
@@ -35,26 +23,6 @@ class LCG extends PseudoRandomGenerator {
   int() {
     this.x = (this.a * this.x + this.c) % this.m;
     return this.x;
-  }
-
-  float() {
-    return this.int() / this.max;
-  }
-
-  boundedInt(min, max) {
-    // Debiased Modulo method,
-    // https://docs.oracle.com/javase/6/docs/api/java/util/Random.html#nextInt%28int%29
-    // https://peteroupc.github.io/randomnotes.html
-    // https://www.pcg-random.org/posts/bounded-rands.html
-    const range = max - min;
-    const t = (2 ** 32) % range
-    let r = this.int();
-
-    while (r < t) {
-      r = this.int();
-    }
-
-    return min + (r % range);
   }
 }
 

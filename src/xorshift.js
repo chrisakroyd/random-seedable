@@ -1,6 +1,6 @@
-import PseudoRandomGenerator from './pseudoRandomGenerator.js';
+import PRNG from './PRNG.js';
 
-class XORShift extends PseudoRandomGenerator {
+class XORShift extends PRNG {
   constructor(seed, a = 13, b = 17, c = 5) {
     super();
     this.orig = this.cast(BigInt(seed), 32);
@@ -30,26 +30,6 @@ class XORShift extends PseudoRandomGenerator {
     x = this.cast(x, 32);
     this.x = x;
     return Number(this.x);
-  }
-
-  float() {
-    return this.int() / this.max;
-  }
-
-  boundedInt(min, max) {
-    // Debiased Modulo method,
-    // https://docs.oracle.com/javase/6/docs/api/java/util/Random.html#nextInt%28int%29
-    // https://peteroupc.github.io/randomnotes.html
-    // https://www.pcg-random.org/posts/bounded-rands.html
-    const range = max - min;
-    const t = (2 ** 32) % range
-    let r = this.int();
-
-    while (r < t) {
-      r = this.int();
-    }
-
-    return min + (r % range);
   }
 }
 
