@@ -5,6 +5,7 @@ const expect = chai.expect;
 
 // First twenty numbers from cpp reference.
 const seed = 1;
+const seed2 = 11234;
 const testData = [270369, 67634689, 2647435461, 307599695, 2398689233, 745495504, 632435482, 435756210, 2005365029,
   2916098932, 2657092299, 1495045943, 3031976842, 82049198, 87470069, 3385103793, 891394312, 3323190024, 321008529,
   4283899417,
@@ -12,6 +13,19 @@ const testData = [270369, 67634689, 2647435461, 307599695, 2398689233, 745495504
 const numDraws = 2500;
 const upperBound = 25;
 const lowerBound = 10;
+
+describe('XorShift generator should be seeded with correct values.', () => {
+  const random = new XORShift(seed);
+
+  it(`Expect initial seed to be set correctly.`, () => {
+    expect(random.seed).to.equal(seed);
+  });
+
+  it(`Expect new seed to be set correctly.`, () => {
+    random.seed = seed2;
+    expect(random.seed).to.equal(seed2);
+  });
+});
 
 describe('Seeded 32 bit xorshift generator to produce exact number sequence.', () => {
   const random = new XORShift(seed);

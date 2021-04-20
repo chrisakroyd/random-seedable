@@ -5,11 +5,25 @@ const expect = chai.expect;
 
 // First ten numbers for seq 10 from cpp reference.
 const seed = 1234;
+const seed2 = 1234789;
 const testData = [3067928073, 889114580, 3219257635, 1486326822, 3450746189, 1275680328, 1045497095,
   742129338, 1126366929, 2032544252];
 const numDraws = 2500;
 const upperBound = 25;
 const lowerBound = 10;
+
+describe('LCG generator should be seeded with correct values.', () => {
+  const random = new LCG(seed);
+
+  it(`Expect initial seed to be set correctly.`, () => {
+    expect(random.seed).to.equal(seed);
+  });
+
+  it(`Expect new seed to be set correctly.`, () => {
+    random.seed = seed2;
+    expect(random.seed).to.equal(seed2);
+  });
+});
 
 describe('Seeded 32 bit lcg generator to produce exact number sequence.', () => {
   const random = new LCG(seed);

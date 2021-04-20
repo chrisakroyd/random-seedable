@@ -5,12 +5,26 @@ const expect = chai.expect;
 
 // First ten numbers for seq 10 from cpp reference.
 const seed = 0x4d595df4d0f33173n;
+const seed2 = 0x6d193ac4d3f12149n;
 const testData = [676697322, 420258633, 3418632178, 3595600211, 3265791279, 257272927, 3607051826, 1330014364,
   1691133457, 2692391003, 1436966076, 3405603488, 3196723772, 2037651542, 1789776910, 3642929604, 3134326335,
   2746793161, 2907548636, 3720053141];
 const numDraws = 2500;
 const upperBound = 25;
 const lowerBound = 10;
+
+describe('PCG generator should be seeded with correct values.', () => {
+  const random = new PCG(seed);
+
+  it(`Expect initial seed to be set correctly.`, () => {
+    expect(random.seed).to.equal(seed);
+  });
+
+  it(`Expect new seed to be set correctly.`, () => {
+    random.seed = seed2;
+    expect(random.seed).to.equal(seed2);
+  });
+});
 
 describe('Seeded 32 bit pcg generator to produce exact number sequence.', () => {
   const random = new PCG(seed);
