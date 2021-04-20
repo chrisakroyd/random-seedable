@@ -2,13 +2,15 @@ import PRNG from './PRNG.js';
 
 class LCG extends PRNG {
   constructor(seed, a = 1664525, c = 1013904223, m = 4294967296) {
-    super();
+    super(m);
+    [seed, a, c, m].forEach(num => this.checkNum(num));
     this.orig = seed;
     this.x = this.orig;
-    this.a = a;
-    this.c = c;
-    this.m = m;
-    [seed, a, c, m].forEach(num => this.checkNum(num));
+    Object.assign(this, { a, c, m }); // Group assignment for brevity.
+  }
+
+  reset() {
+    this.x = this.orig;
   }
 
   set seed(seed) {

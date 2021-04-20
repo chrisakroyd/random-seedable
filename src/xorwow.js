@@ -1,32 +1,12 @@
 import PRNG from './PRNG.js';
-
-// First twenty numbers for from cpp reference.
-// 246875399
-// 3690007200
-// 1264581005
-// 3906711041
-// 1866187943
-// 2481925219
-// 2464530826
-// 1604040631
-// 3653403911
-// 3578085384
-// 1200525144
-// 4095560648
-// 505361588
-// 4238824340
-// 1727412667
-// 4242574606
-// 1873697870
-// 2935408675
-// 77509492
-// 3202066555
+import { MAX32 } from './constants.js';
 
 class XORWow extends PRNG {
   constructor(seed = 123456789, y = 362436069, z = 521288629, w = 88675123,
               v = 5783321, d = 6615241, weyl = 362437) {
-    super();
+    super(MAX32);
     this.orig = this.cast(BigInt(seed), 32);
+
     this.x = this.orig;
     this.y = this.cast(BigInt(y), 32);
     this.z = this.cast(BigInt(z), 32);
@@ -34,6 +14,13 @@ class XORWow extends PRNG {
     this.v = this.cast(BigInt(v), 32);
     this.d = this.cast(BigInt(d), 32);
     this.weyl = this.cast(BigInt(weyl), 32);
+
+    this.origParams = { y: this.y, z: this.z, w: this.w, v: this.v, d: this.d };
+  }
+
+  reset() {
+    this.x = this.orig;
+    Object.assign(this, this.origParams);
   }
 
   int() {
@@ -41,20 +28,16 @@ class XORWow extends PRNG {
     let v = this.v;
 
     t ^= t >> 2n;
-    t = this.cast(t, 32);
     t ^= t << 1n;
-    t = this.cast(t, 32);
     v ^= v << 4n;
-    v = this.cast(v, 32);
 
     this.x = this.y;
     this.y = this.z;
     this.z = this.w;
     this.w = this.v;
-    this.v = v ^ t;
+    this.v = this.cast(v ^ t, 32);
     this.d += this.weyl;
-
-    return Number(this.d + this.v);
+    return Number(this.cast(this.d + this.v, 32));
   }
 }
 

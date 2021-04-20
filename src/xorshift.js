@@ -1,13 +1,18 @@
 import PRNG from './PRNG.js';
+import { MAX32 } from './constants.js';
 
 class XORShift extends PRNG {
   constructor(seed, a = 13, b = 17, c = 5) {
-    super();
+    super(MAX32);
     this.orig = this.cast(BigInt(seed), 32);
     this.x = this.orig;
     this.a = this.cast(BigInt(a), 32);
     this.b = this.cast(BigInt(b), 32);
     this.c = this.cast(BigInt(c), 32);
+  }
+
+  reset() {
+    this.x = this.orig;
   }
 
   set seed(seed) {
