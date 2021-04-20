@@ -12,6 +12,10 @@ class LCG extends PRNG {
     this.x = this.seed;
   }
 
+  get seed() {
+    return this._seed;
+  }
+
   set seed(seed) {
     this._seed = seed;
     this.x = this._seed;

@@ -24,6 +24,10 @@ class XORWow extends PRNG {
     Object.assign(this, this.origParams);
   }
 
+  get seed() {
+    return this._seed;
+  }
+
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 32);
     this.reset();

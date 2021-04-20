@@ -14,6 +14,10 @@ class XORShift extends PRNG {
     this.x = this.seed;
   }
 
+  get seed() {
+    return this._seed;
+  }
+
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 32);
     this.x = this._seed;

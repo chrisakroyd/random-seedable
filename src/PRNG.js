@@ -9,10 +9,6 @@ class PRNG {
     this._seed = seed;
   }
 
-  get seed() {
-    return this._seed;
-  }
-
   cast(number, bits) {
     return BigInt.asUintN(bits, number);
   }

@@ -13,6 +13,10 @@ class PCG extends PRNG {
     this.x = this.seed;
   }
 
+  get seed() {
+    return this._seed;
+  }
+
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 64);
     this.x = this._seed;
@@ -24,6 +28,7 @@ class PCG extends PRNG {
 
   int() {
     let x = this.x;
+    // console.log(x);
     let count = x >> 59n; // 59 = 64 - 5
     this.x = x * this.mul + this.inc;
     this.x = this.cast(this.x, 64);
