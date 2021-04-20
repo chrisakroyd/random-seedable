@@ -16,7 +16,7 @@ class PCG extends PRNG {
 
   set seed(seed) {
     this.orig = this.cast(BigInt(seed), 64);
-    this.x = this.orig;
+    this.reset();
   }
 
   get seed() {

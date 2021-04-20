@@ -23,6 +23,15 @@ class XORWow extends PRNG {
     Object.assign(this, this.origParams);
   }
 
+  set seed(seed) {
+    this.orig = this.cast(BigInt(seed), 32);
+    this.reset();
+  }
+
+  get seed() {
+    return this.orig;
+  }
+
   int() {
     let t = this.x;
     let v = this.v;
