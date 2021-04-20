@@ -1,9 +1,11 @@
+import { MAX32 } from './constants.js';
+
 /**
- * Superclass for all implemented 32 bit generators.
+ * Superclass for all implemented generators.
 **/
 class PRNG {
-  constructor() {
-    this.max = (2 ** 32);
+  constructor(max) {
+    this.max = max;
   }
 
   cast(number, bits) {
@@ -11,10 +13,7 @@ class PRNG {
   }
 
   checkNum(num) {
-    // 32bit only.
     if (num > this.max) {
-      console.log(num);
-      console.log(this.max);
       throw new Error(`Number greater than ${this.max}`);
     }
   }
@@ -36,13 +35,20 @@ class PRNG {
     return this.int() * (1.0 / this.max);
   }
 
-  boundedInt(min, max) {
+  float53() {
+    const a = this.int() >>> 5;
+    const b = this.int() >>> 6;
+
+    return ( a * 67108864.0 + b ) * ( 1.0 / 9007199254740992.0 );
+  }
+
+  randRange(min, max) {
     // Debiased Modulo method,
     // https://docs.oracle.com/javase/6/docs/api/java/util/Random.html#nextInt%28int%29
     // https://peteroupc.github.io/randomnotes.html
     // https://www.pcg-random.org/posts/bounded-rands.html
     const range = max - min;
-    const t = (2 ** 32) % range
+    const t = MAX32 % range
     let r = this.int();
 
     while (r < t) {
