@@ -22,12 +22,27 @@ describe('Seeded 32 bit xorshift generator to produce exact number sequence.', (
   });
 });
 
+describe('Seeded 32 bit xorshift generator to produce exact number sequence pre and post reset.', () => {
+  const random = new XORShift(seed);
+  const preReset = testData.map(() => random.int());
+  random.reset();
+  const postReset = testData.map(() => random.int());
+
+  it('Expect post-reset sequence to equal pre-reset sequence.', () => {
+    preReset.forEach((expectedNumber, index) => {
+      it(`Expect index: ${index} to equal ${expectedNumber}`, () => {
+        expect(random.int()).to.equal(postReset[index]);
+      });
+    });
+  });
+});
+
 describe('32 bit xorshift generator produces ints within bounds', () => {
   const random = new XORShift(seed);
 
   it(`Expect ${numDraws} calls of boundedInt() to produce ints within the range ${lowerBound} - ${upperBound}`, () => {
     for (let i = 0; i < numDraws; i++) {
-      const randNum = random.boundedInt(lowerBound, upperBound);
+      const randNum = random.randRange(lowerBound, upperBound);
       expect(randNum).to.be.greaterThanOrEqual(lowerBound);
       expect(randNum).to.be.lessThanOrEqual(upperBound);
     }
