@@ -3,24 +3,19 @@ import { MAX32 } from './constants.js';
 
 class PCG extends PRNG {
   constructor(seed = 0x4d595df4d0f33173n, mul = 6364136223846793005n, inc = 1442695040888963407n) {
-    super(MAX32);
-    this.orig = this.cast(BigInt(seed), 64);
-    this.x = this.orig;
+    super(MAX32, BigInt(seed));
+    this.seed = seed;
     this.mul = this.cast(BigInt(mul), 64);
     this.inc = this.cast(BigInt(inc), 64);
   }
 
   reset() {
-    this.x = this.orig;
+    this.x = this.seed;
   }
 
   set seed(seed) {
-    this.orig = this.cast(BigInt(seed), 64);
-    this.reset();
-  }
-
-  get seed() {
-    return this.orig;
+    this._seed = this.cast(BigInt(seed), 64);
+    this.x = this._seed;
   }
 
   rotr32(x, r) {

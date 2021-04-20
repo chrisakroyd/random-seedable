@@ -4,10 +4,11 @@ import { MAX32 } from './constants.js';
 class XORWow extends PRNG {
   constructor(seed = 123456789, y = 362436069, z = 521288629, w = 88675123,
               v = 5783321, d = 6615241, weyl = 362437) {
-    super(MAX32);
-    this.orig = this.cast(BigInt(seed), 32);
+    super(MAX32, BigInt(seed));
+    // Other PRNGs call the seed setter, we do not do this here as it would add too much complexity to the function.
+    this._seed = this.cast(this._seed, 32);
+    this.x = this._seed;
 
-    this.x = this.orig;
     this.y = this.cast(BigInt(y), 32);
     this.z = this.cast(BigInt(z), 32);
     this.w = this.cast(BigInt(w), 32);
@@ -19,17 +20,13 @@ class XORWow extends PRNG {
   }
 
   reset() {
-    this.x = this.orig;
+    this.x = this.seed;
     Object.assign(this, this.origParams);
   }
 
   set seed(seed) {
-    this.orig = this.cast(BigInt(seed), 32);
+    this._seed = this.cast(BigInt(seed), 32);
     this.reset();
-  }
-
-  get seed() {
-    return this.orig;
   }
 
   int() {

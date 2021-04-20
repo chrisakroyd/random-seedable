@@ -4,8 +4,13 @@ import { MAX32 } from './constants.js';
  * Superclass for all implemented generators.
 **/
 class PRNG {
-  constructor(max) {
+  constructor(max, seed) {
     this.max = max;
+    this._seed = seed;
+  }
+
+  get seed() {
+    return this._seed;
   }
 
   cast(number, bits) {
