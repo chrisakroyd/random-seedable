@@ -1,0 +1,60 @@
+import chai from 'chai';
+
+const expect = chai.expect;
+
+export const exactSeqTestFn = (random, data, seedVal) => {
+  describe(`Generator seeded with ${seedVal} produces exact number sequence.`, () => {
+    data.forEach((expectedNumber, index) => {
+      it(`Expect number ${index} to equal ${expectedNumber}`, () => {
+        expect(random.int()).to.equal(expectedNumber);
+      });
+    });
+  });
+};
+
+export const resetTestFn = (random, data) => {
+  describe('Generator to produce exact number sequence pre and post reset.', () => {
+    const preReset = data.map(() => random.int());
+    random.reset();
+    const postReset = data.map(() => random.int());
+
+    it('Expect post-reset sequence to equal pre-reset sequence.', () => {
+      preReset.forEach((expectedNumber, index) => {
+        it(`Expect index: ${index} to equal ${expectedNumber}`, () => {
+          expect(random.int()).to.equal(postReset[index]);
+        });
+      });
+    });
+  });
+};
+
+export const withinRangeTestFn = (random, lowerBound, upperBound, numDraws) => {
+  describe('Generator produces ints within bounds', () => {
+    it(`Expect ${numDraws} calls of randRange() stay within the range ${lowerBound} - ${upperBound}`, () => {
+      for (let i = 0; i < numDraws; i++) {
+        const randNum = random.randRange(lowerBound, upperBound);
+        expect(randNum).to.be.greaterThanOrEqual(lowerBound);
+        expect(randNum).to.be.lessThanOrEqual(upperBound);
+      }
+    });
+
+    it(`Expect ${numDraws} calls of int() to produce ints less than maximum (${random.max})`, () => {
+      for (let i = 0; i < numDraws; i++) {
+        const randNum = random.int();
+        expect(randNum).to.be.lessThanOrEqual(random.max);
+      }
+    });
+  });
+};
+
+export const floatGenTestFn = (random, numDraws) => {
+  describe('Generator produces floats.', () => {
+    it(`Expect ${numDraws} calls of float() to produce floats within the range 0.0 - 1.0`, () => {
+      for (let i = 0; i < numDraws; i++) {
+        const randNum = random.float();
+        expect(randNum).to.be.greaterThanOrEqual(0.0);
+        expect(randNum).to.be.lessThanOrEqual(1.0);
+      }
+    });
+  });
+};
