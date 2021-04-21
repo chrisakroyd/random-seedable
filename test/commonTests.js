@@ -58,3 +58,17 @@ export const floatGenTestFn = (random, numDraws) => {
     });
   });
 };
+
+export const seedChangeTestFn = (random, seed, data1, data2) => {
+  describe('Generator should generate two different but exact sequences after seed change.', () => {
+    it('Should produce exact number sequences after reseeding.', () => {
+      const result1 = data1.map(() => random.int());
+      random.seed = seed;
+      const result2 = data2.map(() => random.int());
+
+      expect(result1).to.have.members(data1);
+      expect(result2).to.have.members(data2);
+      expect(result1).to.not.have.members(result2);
+    });
+  });
+};

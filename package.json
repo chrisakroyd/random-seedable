@@ -9,7 +9,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/*.js",
+    "test": "mocha test/*.js --check-leaks",
     "coverage": "nyc mocha"
   },
   "repository": {
