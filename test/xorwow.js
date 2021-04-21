@@ -25,12 +25,12 @@ describe('XorWow generator should be seeded with correct values.', () => {
   const random = new XORWow(seed);
 
   it(`Expect initial seed to be set correctly.`, () => {
-    expect(random.seed).to.equal(seed);
+    expect(random.seed).to.equal(BigInt(seed));
   });
 
   it(`Expect new seed to be set correctly.`, () => {
     random.seed = seed2;
-    expect(random.seed).to.equal(seed2);
+    expect(random.seed).to.equal(BigInt(seed2));
   });
 });
 
