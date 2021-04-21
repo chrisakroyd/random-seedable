@@ -1,5 +1,6 @@
 import chai from 'chai';
 import PCG from '../src/pcg.js';
+import { exactSeqTestFn, floatGenTestFn, resetTestFn, withinRangeTestFn } from './commonTests.js';
 
 const expect = chai.expect;
 
@@ -21,68 +22,32 @@ const numDraws = 2500;
 const upperBound = 25;
 const lowerBound = 10;
 
-describe('PCG generator should be seeded with correct values.', () => {
-  const random = new PCG(seed);
+const Random = PCG;
 
-  it(`Expect initial seed to be set correctly.`, () => {
-    expect(random.seed).to.equal(seed);
-  });
+describe('PCG Generator 32 bit.', () => {
+  describe('Generator should be seeded with correct values.', () => {
+    const random = new PCG(seed);
 
-  it(`Expect new seed to be set correctly.`, () => {
-    random.seed = seed2;
-    expect(random.seed).to.equal(seed2);
-  });
-});
+    it(`Expect initial seed to be set correctly.`, () => {
+      expect(random.seed).to.equal(seed);
+    });
 
-describe('Seeded 32 bit pcg generator to produce exact number sequence.', () => {
-  const random = new PCG(seed);
-  testData.forEach((expectedNumber, index) => {
-    it(`Expect number ${index} to equal ${expectedNumber}`, () => {
-      expect(random.int()).to.equal(expectedNumber);
+    it(`Expect new seed to be set correctly.`, () => {
+      random.seed = seed2;
+      expect(random.seed).to.equal(seed2);
     });
   });
-});
 
-describe('Seeded 32 bit pcg generator to produce exact number sequence pre and post reset.', () => {
-  const random = new PCG(seed);
-  const preReset = testData.map(() => random.int());
-  random.reset();
-  const postReset = testData.map(() => random.int());
+  // Tests for the production of an exact sequence of numbers from the seed.
+  exactSeqTestFn(new Random(seed), testData, seed);
+  exactSeqTestFn(new Random(seed2), testData2, seed2);
 
-  it('Expect post-reset sequence to equal pre-reset sequence.', () => {
-    preReset.forEach((expectedNumber, index) => {
-      it(`Expect index: ${index} to equal ${expectedNumber}`, () => {
-        expect(random.int()).to.equal(postReset[index]);
-      });
-    });
-  });
-});
+  // Tests for successful reset of the generator.
+  resetTestFn(new Random(seed), testData);
 
-describe('32 bit pcg generator produces ints within bounds', () => {
-  const random = new PCG(seed);
-  it(`Expect ${numDraws} calls of boundedInt() to produce ints within the range ${lowerBound} - ${upperBound}`, () => {
-    for (let i = 0; i < numDraws; i++) {
-      const randNum = random.randRange(lowerBound, upperBound);
-      expect(randNum).to.be.greaterThanOrEqual(lowerBound);
-      expect(randNum).to.be.lessThanOrEqual(upperBound);
-    }
-  });
+  // Test that the generator stays within the given bounds.
+  withinRangeTestFn(new Random(seed), lowerBound, upperBound, numDraws);
 
-  it(`Expect ${numDraws} calls of int() to produce ints less than maximum (${random.max})`, () => {
-    for (let i = 0; i < numDraws; i++) {
-      const randNum = random.int();
-      expect(randNum).to.be.lessThanOrEqual(random.max);
-    }
-  });
-});
-
-describe('32 bit pcg generator produces floats.', () => {
-  const random = new PCG(seed);
-  it(`Expect ${numDraws} calls of float() to produce floats within the range 0.0 - 1.0`, () => {
-    for (let i = 0; i < numDraws; i++) {
-      const randNum = random.float();
-      expect(randNum).to.be.greaterThanOrEqual(0.0);
-      expect(randNum).to.be.lessThanOrEqual(1.0);
-    }
-  });
+  // Test that generator actually produces floats.
+  floatGenTestFn(new Random(seed), numDraws);
 });
