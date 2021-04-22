@@ -44,6 +44,13 @@ export const withinRangeTestFn = (random, lowerBound, upperBound, numDraws) => {
         expect(randNum).to.be.lessThanOrEqual(random.max);
       }
     });
+
+    it(`Expect ${numDraws} calls of randBelow() stay below ${upperBound}`, () => {
+      for (let i = 0; i < numDraws; i++) {
+        const randNum = random.randBelow(upperBound);
+        expect(randNum).to.be.lessThanOrEqual(upperBound);
+      }
+    });
   });
 };
 

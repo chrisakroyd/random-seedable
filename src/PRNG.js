@@ -58,6 +58,10 @@ class PRNG {
 
     return min + (r % range);
   }
+
+  randBelow(max) {
+    return this.randRange(0, max);
+  }
 }
 
 export default PRNG;
