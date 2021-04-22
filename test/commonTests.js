@@ -33,6 +33,7 @@ export const withinRangeTestFn = (random, lowerBound, upperBound, numDraws) => {
     it(`Expect ${numDraws} calls of randRange() stay within the range ${lowerBound} - ${upperBound}`, () => {
       for (let i = 0; i < numDraws; i++) {
         const randNum = random.randRange(lowerBound, upperBound);
+        expect(randNum).to.not.equal(undefined);
         expect(randNum).to.be.greaterThanOrEqual(lowerBound);
         expect(randNum).to.be.lessThanOrEqual(upperBound);
       }
@@ -41,6 +42,7 @@ export const withinRangeTestFn = (random, lowerBound, upperBound, numDraws) => {
     it(`Expect ${numDraws} calls of int() to produce ints less than maximum (${random.max})`, () => {
       for (let i = 0; i < numDraws; i++) {
         const randNum = random.int();
+        expect(randNum).to.not.equal(undefined);
         expect(randNum).to.be.lessThanOrEqual(random.max);
       }
     });
@@ -48,6 +50,7 @@ export const withinRangeTestFn = (random, lowerBound, upperBound, numDraws) => {
     it(`Expect ${numDraws} calls of randBelow() stay below ${upperBound}`, () => {
       for (let i = 0; i < numDraws; i++) {
         const randNum = random.randBelow(upperBound);
+        expect(randNum).to.not.equal(undefined);
         expect(randNum).to.be.lessThanOrEqual(upperBound);
       }
     });
@@ -59,6 +62,7 @@ export const floatGenTestFn = (random, numDraws) => {
     it(`Expect ${numDraws} calls of float() to produce floats within the range 0.0 - 1.0`, () => {
       for (let i = 0; i < numDraws; i++) {
         const randNum = random.float();
+        expect(randNum).to.not.equal(undefined);
         expect(randNum).to.be.greaterThanOrEqual(0.0);
         expect(randNum).to.be.lessThanOrEqual(1.0);
       }
