@@ -1,6 +1,13 @@
 import chai from 'chai';
 import XORWow from '../src/xorwow.js';
-import { exactSeqTestFn, floatGenTestFn, resetTestFn, withinRangeTestFn, seedChangeTestFn } from './commonTests.js';
+import {
+  exactSeqTestFn,
+  floatGenTestFn,
+  resetTestFn,
+  withinRangeTestFn,
+  seedChangeTestFn,
+  choiceTestFn
+} from './commonTests.js';
 
 const expect = chai.expect;
 
@@ -53,4 +60,8 @@ describe('XorWow generator 32 bit.', () => {
 
   // Test that generator generates two different, exact sequences after being reseeded.
   seedChangeTestFn(new Random(seed), seed2, testData, testData2);
+
+  // Choice
+  choiceTestFn(new Random(seed), testData);
+  choiceTestFn(new Random(seed), testData2);
 });

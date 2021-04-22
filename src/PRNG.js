@@ -62,6 +62,10 @@ class PRNG {
   randBelow(max) {
     return this.randRange(0, max);
   }
+
+  choice(array) {
+    return array[this.randBelow(array.length)];
+  }
 }
 
 export default PRNG;

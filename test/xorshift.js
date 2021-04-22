@@ -1,6 +1,13 @@
 import chai from 'chai';
 import XORShift from '../src/xorshift.js';
-import { exactSeqTestFn, floatGenTestFn, resetTestFn, seedChangeTestFn, withinRangeTestFn } from './commonTests.js';
+import {
+  choiceTestFn,
+  exactSeqTestFn,
+  floatGenTestFn,
+  resetTestFn,
+  seedChangeTestFn,
+  withinRangeTestFn
+} from './commonTests.js';
 
 const expect = chai.expect;
 
@@ -53,4 +60,8 @@ describe('XorShift generator 32 bit.', () => {
 
   // Test that generator generates two different, exact sequences after being reseeded.
   seedChangeTestFn(new Random(seed), seed2, testData, testData2);
+
+  // Choice
+  choiceTestFn(new Random(seed), testData);
+  choiceTestFn(new Random(seed), testData2);
 });

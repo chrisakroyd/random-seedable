@@ -1,6 +1,13 @@
 import chai from 'chai';
 import LCG from '../src/lcg.js';
-import { exactSeqTestFn, resetTestFn, withinRangeTestFn, floatGenTestFn, seedChangeTestFn } from './commonTests.js';
+import {
+  exactSeqTestFn,
+  resetTestFn,
+  withinRangeTestFn,
+  floatGenTestFn,
+  seedChangeTestFn,
+  choiceTestFn
+} from './commonTests.js';
 
 const expect = chai.expect;
 
@@ -51,4 +58,8 @@ describe('LCG Generator.', () => {
 
   // Test that generator generates two different, exact sequences after being reseeded.
   seedChangeTestFn(new Random(seed), seed2, testData, testData2);
+
+  // Choice
+  choiceTestFn(new Random(seed), testData);
+  choiceTestFn(new Random(seed), testData2);
 });

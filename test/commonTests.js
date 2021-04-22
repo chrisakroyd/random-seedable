@@ -79,3 +79,11 @@ export const seedChangeTestFn = (random, seed, data1, data2) => {
     });
   });
 };
+
+export const choiceTestFn = (random, data) => {
+  describe('Generator should be able to randomly choose an element from an array.', () => {
+    it('Should successfully pick elements at random.', () => {
+      data.forEach(() => expect(data).to.contain(random.choice(data)));
+    });
+  });
+};
