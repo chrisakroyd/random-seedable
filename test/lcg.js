@@ -6,7 +6,8 @@ import {
   withinRangeTestFn,
   floatGenTestFn,
   seedChangeTestFn,
-  choiceTestFn
+  choiceTestFn,
+  arrayInitTestFn,
 } from './commonTests.js';
 
 const expect = chai.expect;
@@ -62,4 +63,7 @@ describe('LCG Generator.', () => {
   // Choice
   choiceTestFn(new Random(seed), testData);
   choiceTestFn(new Random(seed), testData2);
+
+  // Array initialisation.
+  arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);
 });

@@ -66,6 +66,22 @@ class PRNG {
   choice(array) {
     return array[this.randBelow(array.length)];
   }
+
+  intArray(size) {
+    return new Array(size).map(() => this.int());
+  }
+
+  randRangeArray(size, lowerBound, upperBound) {
+    return new Array(size).map(() => this.randRange(lowerBound, upperBound));
+  }
+
+  floatArray(size) {
+    return new Array(size).map(() => this.float());
+  }
+
+  float53Array(size) {
+    return new Array(size).map(() => this.float53());
+  }
 }
 
 export default PRNG;

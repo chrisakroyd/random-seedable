@@ -87,3 +87,60 @@ export const choiceTestFn = (random, data) => {
     });
   });
 };
+
+export const arrayInitTestFn = (random, numDraws, lowerBound, upperBound) => {
+  const randSamples = 50;
+
+  describe('Successfully initialise arrays of varying types.', () => {
+    it('Should generate an int array.', () => {
+      const testArray = random.intArray(numDraws);
+
+      console.log(testArray);
+
+      const testSamples = new Array(randSamples).map(() => random.choice(testArray));
+      expect(testArray.length).to.equal(numDraws);
+      expect(testSamples.length).to.equal(randSamples);
+
+      testSamples.forEach((item) => {
+        expect(item).to.be.greaterThanOrEqual(0);
+        expect(item).to.be.lessThanOrEqual(random.max);
+      });
+    });
+
+    it(`Should generate a rand int array between within the range ${lowerBound} - ${upperBound}.`, () => {
+      const testArray = random.randRangeArray(numDraws, lowerBound, upperBound);
+      const testSamples = new Array(randSamples).map(() => random.choice(testArray));
+      expect(testArray.length).to.equal(numDraws);
+      expect(testArray[0]).to.not.equal(undefined);
+
+      testSamples.forEach((item) => {
+        expect(item).to.be.greaterThanOrEqual(lowerBound);
+        expect(item).to.be.lessThanOrEqual(upperBound);
+      });
+    });
+
+    it('Should generate an float array.', () => {
+      const testArray = random.floatArray(numDraws);
+      const testSamples = new Array(randSamples).map(() => random.choice(testArray));
+      expect(testArray.length).to.equal(numDraws);
+      expect(testArray[0]).to.not.equal(undefined);
+
+      testSamples.forEach((item) => {
+        expect(item).to.be.greaterThanOrEqual(0.0);
+        expect(item).to.be.lessThanOrEqual(1.0);
+      });
+    });
+
+    it('Should generate an float53 array.', () => {
+      const testArray = random.float53Array(numDraws);
+      const testSamples = new Array(randSamples).map(() => random.choice(testArray));
+      expect(testArray.length).to.equal(numDraws);
+      expect(testArray[0]).to.not.equal(undefined);
+
+      testSamples.forEach((item) => {
+        expect(item).to.be.greaterThanOrEqual(0.0);
+        expect(item).to.be.lessThanOrEqual(1.0);
+      });
+    });
+  });
+};

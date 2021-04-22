@@ -1,6 +1,7 @@
 import chai from 'chai';
 import PCG from '../src/pcg.js';
 import {
+  arrayInitTestFn,
   choiceTestFn,
   exactSeqTestFn,
   floatGenTestFn,
@@ -64,4 +65,7 @@ describe('PCG Generator 32 bit.', () => {
   // Choice
   choiceTestFn(new Random(seed), testData);
   choiceTestFn(new Random(seed), testData2);
+
+  // Array initialisation.
+  arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);
 });

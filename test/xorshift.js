@@ -1,6 +1,7 @@
 import chai from 'chai';
 import XORShift from '../src/xorshift.js';
 import {
+  arrayInitTestFn,
   choiceTestFn,
   exactSeqTestFn,
   floatGenTestFn,
@@ -64,4 +65,7 @@ describe('XorShift generator 32 bit.', () => {
   // Choice
   choiceTestFn(new Random(seed), testData);
   choiceTestFn(new Random(seed), testData2);
+
+  // Array initialisation.
+  arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);
 });
