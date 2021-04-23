@@ -67,20 +67,24 @@ class PRNG {
     return array[this.randBelow(array.length)];
   }
 
+  initArray(size, mapFn) {
+    return Array.from({ length: size }, mapFn);
+  }
+
   intArray(size) {
-    return Array.from({ length: size }, () => this.int());
+    return this.initArray(size, () => this.int());
   }
 
   randRangeArray(size, lowerBound, upperBound) {
-    return Array.from({ length: size }, () => this.randRange(lowerBound, upperBound));
+    return this.initArray(size, () => this.randRange(lowerBound, upperBound));
   }
 
   floatArray(size) {
-    return Array.from({ length: size }, () => this.float());
+    return this.initArray(size, () => this.float());
   }
 
   float53Array(size) {
-    return Array.from({ length: size }, () => this.float53());
+    return this.initArray(size, () => this.float53());
   }
 }
 
