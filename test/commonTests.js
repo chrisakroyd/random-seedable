@@ -99,13 +99,12 @@ export const arrayInitTestFn = (random, numDraws, lowerBound, upperBound) => {
     it('Should generate an int array.', () => {
       const testArray = random.intArray(numDraws);
 
-      console.log(testArray);
-
       const testSamples = new Array(randSamples).map(() => random.choice(testArray));
       expect(testArray.length).to.equal(numDraws);
-      expect(testSamples.length).to.equal(randSamples);
+      expect(testArray[0]).to.not.be.undefined;
 
       testSamples.forEach((item) => {
+        expect(item).to.not.be.undefined;
         expect(item).to.be.greaterThanOrEqual(0);
         expect(item).to.be.lessThanOrEqual(random.max);
       });
@@ -115,9 +114,10 @@ export const arrayInitTestFn = (random, numDraws, lowerBound, upperBound) => {
       const testArray = random.randRangeArray(numDraws, lowerBound, upperBound);
       const testSamples = new Array(randSamples).map(() => random.choice(testArray));
       expect(testArray.length).to.equal(numDraws);
-      expect(testArray[0]).to.not.equal(undefined);
+      expect(testArray[0]).to.not.be.undefined;
 
       testSamples.forEach((item) => {
+        expect(item).to.not.be.undefined;
         expect(item).to.be.greaterThanOrEqual(lowerBound);
         expect(item).to.be.lessThanOrEqual(upperBound);
       });
@@ -127,9 +127,10 @@ export const arrayInitTestFn = (random, numDraws, lowerBound, upperBound) => {
       const testArray = random.floatArray(numDraws);
       const testSamples = new Array(randSamples).map(() => random.choice(testArray));
       expect(testArray.length).to.equal(numDraws);
-      expect(testArray[0]).to.not.equal(undefined);
+      expect(testArray[0]).to.not.be.undefined;
 
       testSamples.forEach((item) => {
+        expect(item).to.not.be.undefined;
         expect(item).to.be.greaterThanOrEqual(0.0);
         expect(item).to.be.lessThanOrEqual(1.0);
       });
@@ -139,9 +140,10 @@ export const arrayInitTestFn = (random, numDraws, lowerBound, upperBound) => {
       const testArray = random.float53Array(numDraws);
       const testSamples = new Array(randSamples).map(() => random.choice(testArray));
       expect(testArray.length).to.equal(numDraws);
-      expect(testArray[0]).to.not.equal(undefined);
+      expect(testArray[0]).to.not.be.undefined;
 
       testSamples.forEach((item) => {
+        expect(item).to.not.be.undefined;
         expect(item).to.be.greaterThanOrEqual(0.0);
         expect(item).to.be.lessThanOrEqual(1.0);
       });
