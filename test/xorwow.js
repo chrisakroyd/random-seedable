@@ -6,7 +6,9 @@ import {
   resetTestFn,
   withinRangeTestFn,
   seedChangeTestFn,
-  choiceTestFn, arrayInitTestFn
+  choiceTestFn,
+  arrayInitTestFn,
+  uniqueItemTestFn,
 } from './commonTests.js';
 
 const expect = chai.expect;
@@ -67,4 +69,5 @@ describe('XorWow generator 32 bit.', () => {
 
   // Array initialisation.
   arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);
+  uniqueItemTestFn(new Random(seed));
 });

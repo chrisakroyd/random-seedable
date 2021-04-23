@@ -150,3 +150,26 @@ export const arrayInitTestFn = (random, numDraws, lowerBound, upperBound) => {
     });
   });
 };
+
+export const uniqueItemTestFn = (random, numDraws = 5000, tolerance = 2) => {
+  describe('Generator generates a unique list of random numbers.', () => {
+    const intArray = random.intArray(numDraws);
+    const floatArray = random.intArray(numDraws);
+    const float53Array = random.intArray(numDraws);
+
+    it('Should generate a near-unique int array', () => {
+      const intSet = new Set(intArray);
+      expect(intSet.size).to.be.greaterThanOrEqual(intArray.length - tolerance);
+    });
+
+    it('Should generate a near-unique float array', () => {
+      const floatSet = new Set(floatArray);
+      expect(floatSet.size).to.be.greaterThanOrEqual(floatArray.length - tolerance);
+    });
+
+    it('Should generate a near-unique float53 array', () => {
+      const float53Set = new Set(float53Array);
+      expect(float53Set.size).to.be.greaterThanOrEqual(float53Array.length - tolerance);
+    });
+  });
+};

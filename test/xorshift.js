@@ -7,7 +7,8 @@ import {
   floatGenTestFn,
   resetTestFn,
   seedChangeTestFn,
-  withinRangeTestFn
+  withinRangeTestFn,
+  uniqueItemTestFn,
 } from './commonTests.js';
 
 const expect = chai.expect;
@@ -68,4 +69,5 @@ describe('XorShift generator 32 bit.', () => {
 
   // Array initialisation.
   arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);
+  uniqueItemTestFn(new Random(seed));
 });
