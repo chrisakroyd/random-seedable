@@ -154,8 +154,8 @@ export const arrayInitTestFn = (random, numDraws, lowerBound, upperBound) => {
 export const uniqueItemTestFn = (random, numDraws = 5000, tolerance = 2) => {
   describe('Generator generates a unique list of random numbers.', () => {
     const intArray = random.intArray(numDraws);
-    const floatArray = random.intArray(numDraws);
-    const float53Array = random.intArray(numDraws);
+    const floatArray = random.floatArray(numDraws);
+    const float53Array = random.float53Array(numDraws);
 
     it('Should generate a near-unique int array', () => {
       const intSet = new Set(intArray);
@@ -171,5 +171,11 @@ export const uniqueItemTestFn = (random, numDraws = 5000, tolerance = 2) => {
       const float53Set = new Set(float53Array);
       expect(float53Set.size).to.be.greaterThanOrEqual(float53Array.length - tolerance);
     });
+  });
+};
+
+export const shuffleTestFn = (random) => {
+  describe('shuffleTestFn', () => {
+
   });
 };
