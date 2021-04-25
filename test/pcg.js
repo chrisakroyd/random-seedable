@@ -9,6 +9,7 @@ import {
   seedChangeTestFn,
   withinRangeTestFn,
   uniqueItemTestFn,
+  shuffleTestFn,
 } from './commonTests.js';
 
 const expect = chai.expect;
@@ -70,4 +71,7 @@ describe('PCG Generator 32 bit.', () => {
   // Array initialisation.
   arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);
   uniqueItemTestFn(new Random(seed));
+
+  // Array shuffling.
+  shuffleTestFn(new Random(seed));
 });

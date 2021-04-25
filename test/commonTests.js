@@ -174,8 +174,27 @@ export const uniqueItemTestFn = (random, numDraws = 5000, tolerance = 2) => {
   });
 };
 
-export const shuffleTestFn = (random) => {
-  describe('shuffleTestFn', () => {
+export const shuffleTestFn = (random, tolerance = 2, numDraws = 10, arraySize = 5000) => {
+  const samePosition = (array1, array2) => {
+    let count = 0;
 
+    for (let i = 0; i < array1.length; i++) {
+      if (array1[i] === array2[i]) {
+        count += 1;
+      }
+    }
+
+    return count;
+  };
+
+  describe('Generator should shuffle the list into numerous unique permutations with little overlap.', () => {
+    it(`Expect fewer than ${tolerance} numbers to be in the same place for ${numDraws} runs.`, () => {
+      for (let i = 0; i < numDraws; i++) {
+        const intArray = random.intArray(arraySize);
+        const shuffledArray = random.shuffle(intArray, false);  // Shuffle a cloned array as shuffle is in place
+        const sameCount = samePosition(intArray, shuffledArray);
+        expect(sameCount).to.be.lessThanOrEqual(tolerance);
+      }
+    });
   });
 };

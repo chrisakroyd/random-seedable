@@ -67,6 +67,24 @@ class PRNG {
     return array[this.randBelow(array.length)];
   }
 
+  shuffle(array, inplace = true) {
+    let toSort = array;
+
+    if (!inplace) {
+      toSort = Array.from(toSort);
+    }
+
+   // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle.
+   for (let i = toSort.length - 1; i > 0; i--) {
+      const j = this.randRange(0, i);
+      const temp = toSort[i];
+      toSort[i] = toSort[j];
+      toSort[j] = temp;
+    }
+
+    return toSort;
+  };
+
   initArray(size, mapFn) {
     return Array.from({ length: size }, mapFn);
   }
