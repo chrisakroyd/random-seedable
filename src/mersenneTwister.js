@@ -16,7 +16,8 @@ class MersenneTwister extends PRNG {
     this.state = new Array(n);
     this.N = n;
     this.M = m;
-    this.left = 1;
+    this.initf = 0;
+    this.stateIndex = 0;
 
     // Trigger seed setter after all variables initialised.
     this.seed = seed;
@@ -38,8 +39,7 @@ class MersenneTwister extends PRNG {
       /* 2002/01/09 modified by Makoto Matsumoto             */
       this.state[j] &= 0xffffffffn;  /* for >32 bit machines */
     }
-
-    this.left = 1;
+    this.initf = 1;
   }
 
   mixBits(u, v) {
@@ -62,16 +62,18 @@ class MersenneTwister extends PRNG {
     }
 
     this.state[this.N - 1] = this.state[this.M - 1] ^ this.twist(this.state[this.N - 1], this.state[0])
+    this.stateIndex = 0;
+    this.initf = 0;
   }
 
   int() {
     let y;
 
-    this.left -= 1;
-
-    if (this.left === 0) {
+    if (this.stateIndex >= this.N || this.initf) {
       this.nextState();
     }
+
+    y = this.state[this.stateIndex++];
 
     /* Tempering */
     y ^= (y >> 11n);
@@ -79,7 +81,7 @@ class MersenneTwister extends PRNG {
     y ^= (y << 15n) & 0xefc60000n;
     y ^= (y >> 18n);
 
-    return y;
+    return Number(y);
   }
 }
 
