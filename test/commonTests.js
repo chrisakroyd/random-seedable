@@ -154,12 +154,18 @@ export const arrayInitTestFn = (random, numDraws, lowerBound, upperBound) => {
 export const uniqueItemTestFn = (random, numDraws = 5000, tolerance = 2) => {
   describe('Generator generates a unique list of random numbers.', () => {
     const intArray = random.intArray(numDraws);
+    const bigIntArray = random.bigIntArray(numDraws);
     const floatArray = random.floatArray(numDraws);
     const float53Array = random.float53Array(numDraws);
 
     it('Should generate a near-unique int array', () => {
       const intSet = new Set(intArray);
       expect(intSet.size).to.be.greaterThanOrEqual(intArray.length - tolerance);
+    });
+
+    it('Should generate a near-unique BigInt array', () => {
+      const intSet = new Set(bigIntArray);
+      expect(intSet.size).to.be.greaterThanOrEqual(bigIntArray.length - tolerance);
     });
 
     it('Should generate a near-unique float array', () => {

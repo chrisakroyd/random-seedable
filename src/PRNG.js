@@ -101,6 +101,10 @@ class PRNG {
     return this.initArray(size, () => this.int());
   }
 
+  bigIntArray(size) {
+    return this.initArray(size, () => this.bigInt());
+  }
+
   randRangeArray(size, lowerBound, upperBound) {
     return this.initArray(size, () => this.randRange(lowerBound, upperBound));
   }
