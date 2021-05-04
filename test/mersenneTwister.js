@@ -153,9 +153,15 @@ const nextStateData = [
 const seed = 5489;
 const seed2 = 19650218;
 
-describe('Mersenne Twister Generator.', () => {
+const numDraws = 2500;
+const upperBound = 25;
+const lowerBound = 10;
+
+const Random = MersenneTwister;
+
+describe('Mersenne Twister Generator 32 bit.', () => {
   describe('Generator should be seeded with correct values.', () => {
-    const random = new MersenneTwister(seed);
+    const random = new Random(seed);
 
     it(`Expect initial seed to be set correctly.`, () => {
       expect(random.seed).to.equal(BigInt(seed));
@@ -169,7 +175,7 @@ describe('Mersenne Twister Generator.', () => {
 
   describe('Generator state once initialised should match test data.', () => {
     it('Expect generator internal state to match reference copy.', () => {
-      const random = new MersenneTwister(seed);
+      const random = new Random(seed);
       initialStateData.forEach((item, i) => {
         expect(random.state[i]).to.equal(BigInt(item));
       });
@@ -178,7 +184,7 @@ describe('Mersenne Twister Generator.', () => {
 
   describe('Generator state should compute nextState() correctly.', () => {
     it('Expect generator internal state to mutate and match reference copy.', () => {
-      const random = new MersenneTwister(seed);
+      const random = new Random(seed);
 
       random.nextState();
 
@@ -188,31 +194,31 @@ describe('Mersenne Twister Generator.', () => {
     });
   });
 
-  // // Tests for the production of an exact sequence of numbers from the seed.
-  // exactSeqTestFn(new Random(seed), testData, seed);
+  // Tests for the production of an exact sequence of numbers from the seed.
+  exactSeqTestFn(new Random(seed), testData, seed);
   // exactSeqTestFn(new Random(seed2), testData2, seed2);
-  //
-  // // Tests for successful reset of the generator.
-  // resetTestFn(new Random(seed), testData);
-  //
-  // // Test that the generator stays within the given bounds.
-  // withinRangeTestFn(new Random(seed), lowerBound, upperBound, numDraws);
-  //
-  // // Test that generator actually produces floats.
-  // floatGenTestFn(new Random(seed), numDraws);
-  //
-  // // Test that generator generates two different, exact sequences after being reseeded.
+
+  // Tests for successful reset of the generator.
+  resetTestFn(new Random(seed), testData);
+
+  // Test that the generator stays within the given bounds.
+  withinRangeTestFn(new Random(seed), lowerBound, upperBound, numDraws);
+
+  // Test that generator actually produces floats.
+  floatGenTestFn(new Random(seed), numDraws);
+
+  // Test that generator generates two different, exact sequences after being reseeded.
   // seedChangeTestFn(new Random(seed), seed2, testData, testData2);
-  //
-  // // Choice
-  // choiceTestFn(new Random(seed), testData);
+
+  // Choice
+  choiceTestFn(new Random(seed), testData);
   // choiceTestFn(new Random(seed), testData2);
-  //
-  // // Array initialisation.
-  // arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);
-  // uniqueItemTestFn(new Random(seed));
-  //
-  // // Array shuffling.
-  // shuffleTestFn(new Random(seed));
+
+  // Array initialisation.
+  arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);
+  uniqueItemTestFn(new Random(seed));
+
+  // Array shuffling.
+  shuffleTestFn(new Random(seed));
 });
 
