@@ -66,7 +66,7 @@ describe('XorWow generator 32 bit.', () => {
 
   // Choice
   choiceTestFn(new Random(seed), testData);
-  choiceTestFn(new Random(seed), testData2);
+  choiceTestFn(new Random(seed2), testData2);
 
   // Array initialisation.
   arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);

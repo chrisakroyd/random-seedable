@@ -18,6 +18,11 @@ const testData = [
   418932835, 2350294565, 1196140740,  809094426, 2348838239, 4264392720, 4112460519, 4279768804, 4144164697, 4156218106,
 ];
 
+const testData2 = [
+  2325592414, 482149846, 4177211283, 3872387439, 1663027210, 2005191859, 666881213, 3289399202, 2514534568, 3882134983,
+  4129444750, 1642354536, 1534745662, 4071148575, 198677157, 743002443, 2133457855, 3498546871, 1282847148, 1855778934,
+];
+
 const initialStateData = [
   5489, 1301868182, 2938499221, 2950281878, 1875628136,  751856242,  944701696, 2243192071,  694061057,  219885934,
   2066767472, 3182869408,  485472502, 2336857883, 1071588843, 3418470598,  951210697, 3693558366, 2923482051, 1793174584,
@@ -196,7 +201,7 @@ describe('Mersenne Twister Generator 32 bit.', () => {
 
   // Tests for the production of an exact sequence of numbers from the seed.
   exactSeqTestFn(new Random(seed), testData, seed);
-  // exactSeqTestFn(new Random(seed2), testData2, seed2);
+  exactSeqTestFn(new Random(seed2), testData2, seed2);
 
   // Tests for successful reset of the generator.
   resetTestFn(new Random(seed), testData);
@@ -208,11 +213,11 @@ describe('Mersenne Twister Generator 32 bit.', () => {
   floatGenTestFn(new Random(seed), numDraws);
 
   // Test that generator generates two different, exact sequences after being reseeded.
-  // seedChangeTestFn(new Random(seed), seed2, testData, testData2);
+  seedChangeTestFn(new Random(seed), seed2, testData, testData2);
 
   // Choice
   choiceTestFn(new Random(seed), testData);
-  // choiceTestFn(new Random(seed), testData2);
+  choiceTestFn(new Random(seed2), testData2);
 
   // Array initialisation.
   arrayInitTestFn(new Random(seed), numDraws, lowerBound, upperBound);

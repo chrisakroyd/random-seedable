@@ -225,6 +225,7 @@ double genrand_res53(void)
 int main(void)
 {
     int i;
+    // NOTE: To generate reference for test data we use init_genrand() and the seeds 5489 + 19650218.
     unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
     init_by_array(init, length);
     /* This is an example of initializing by an array.       */
