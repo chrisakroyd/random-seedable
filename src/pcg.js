@@ -26,14 +26,14 @@ class PCG extends PRNG {
     return this.cast(x >> r | x << (-r & 31n), 32);
   }
 
-  int() {
+  _int() {
     let x = this.x;
     // console.log(x);
     let count = x >> 59n; // 59 = 64 - 5
     this.x = x * this.mul + this.inc;
     this.x = this.cast(this.x, 64);
     x ^= x >> 18n; // 18 = (64 - 27) / 2
-    return Number(this.rotr32(this.cast((x >> 27n), 32), count)); // 27 = 32 - 5
+    return this.rotr32(this.cast((x >> 27n), 32), count); // 27 = 32 - 5
   }
 }
 

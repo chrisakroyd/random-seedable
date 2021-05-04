@@ -66,7 +66,7 @@ class MersenneTwister extends PRNG {
     this.initf = 0;
   }
 
-  int() {
+  _int() {
     let y;
 
     if (this.stateIndex >= this.N || this.initf) {
@@ -81,7 +81,7 @@ class MersenneTwister extends PRNG {
     y ^= (y << 15n) & 0xefc60000n;
     y ^= (y >> 18n);
 
-    return Number(y);
+    return y;
   }
 }
 

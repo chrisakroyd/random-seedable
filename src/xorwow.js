@@ -33,7 +33,7 @@ class XORWow extends PRNG {
     this.reset();
   }
 
-  int() {
+  _int() {
     let t = this.x;
     let v = this.v;
 
@@ -47,7 +47,7 @@ class XORWow extends PRNG {
     this.w = this.v;
     this.v = this.cast(v ^ t, 32);
     this.d += this.weyl;
-    return Number(this.cast(this.d + this.v, 32));
+    return this.cast(this.d + this.v, 32);
   }
 }
 

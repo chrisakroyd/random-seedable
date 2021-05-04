@@ -23,7 +23,7 @@ class XORShift extends PRNG {
     this.x = this._seed;
   }
 
-  int() {
+  _int() {
     let x = this.x;
     x ^= x << this.a;
     // Recast to uint32. BigInt on a left shift will always shift and keep digits regardless
@@ -33,7 +33,7 @@ class XORShift extends PRNG {
     x ^= x << this.c;
     x = this.cast(x, 32);
     this.x = x;
-    return Number(this.x);
+    return x;
   }
 }
 

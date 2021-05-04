@@ -19,17 +19,25 @@ class PRNG {
     }
   }
 
-  int() {
-    if (this.constructor === PRNG) {
-      throw new Error('Method not implemented');
-    }
-    return 0;
-  }
-
   reset() {
     if (this.constructor === PRNG) {
       throw new Error('Method not implemented');
     }
+  }
+
+  _int() {
+    if (this.constructor === PRNG) {
+      throw new Error('Method not implemented');
+    }
+    return BigInt(0);
+  }
+
+  bigInt() {
+    return this._int();
+  }
+
+  int() {
+    return Number(this._int());
   }
 
   float() {

@@ -21,9 +21,9 @@ class LCG extends PRNG {
     this.x = this._seed;
   }
 
-  int() {
+  _int() {
     this.x = (this.a * this.x + this.c) % this.m;
-    return this.x;
+    return BigInt(this.x);
   }
 }
 
