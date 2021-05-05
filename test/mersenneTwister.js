@@ -7,7 +7,11 @@ import {
   exactSeqTestFn,
   floatGenTestFn,
   resetTestFn,
-  seedChangeTestFn, shuffleTestFn, uniqueItemTestFn,
+  seedSetTestFn,
+  seedChangeTestFn,
+  initialSeedTestFn,
+  shuffleTestFn,
+  uniqueItemTestFn,
   withinRangeTestFn
 } from './commonTests.js';
 
@@ -165,18 +169,9 @@ const lowerBound = 10;
 const generator = (genSeed) => new MersenneTwister(genSeed);
 
 describe('Mersenne Twister Generator 32 bit.', () => {
-  describe('Generator should be seeded with correct values.', () => {
-    const random = generator(seed);
-
-    it(`Expect initial seed to be set correctly.`, () => {
-      expect(random.seed).to.be.oneOf([seed, BigInt(seed)]);
-    });
-
-    it(`Expect new seed to be set correctly.`, () => {
-      random.seed = seed2;
-      expect(random.seed).to.be.oneOf([seed2, BigInt(seed2)]);
-    });
-  });
+  // Tests for seed initial setting + updating.
+  initialSeedTestFn(generator, [seed, seed2]);
+  seedSetTestFn(generator(seed), seed2);
 
   describe('Generator state once initialised should match test data.', () => {
     it('Expect generator internal state to match reference copy.', () => {

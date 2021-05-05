@@ -1,4 +1,3 @@
-import chai from 'chai';
 import XORShift from '../src/xorshift.js';
 import {
   arrayInitTestFn,
@@ -10,9 +9,9 @@ import {
   withinRangeTestFn,
   uniqueItemTestFn,
   shuffleTestFn,
+  initialSeedTestFn,
+  seedSetTestFn,
 } from './commonTests.js';
-
-const expect = chai.expect;
 
 // First twenty numbers from cpp reference.
 const seed = 1;
@@ -35,18 +34,9 @@ const lowerBound = 10;
 const generator = (genSeed) => new XORShift(genSeed);
 
 describe('XorShift generator 32 bit.', () => {
-  describe('XorShift generator should be seeded with correct values.', () => {
-    const random = generator(seed);
-
-    it(`Expect initial seed to be set correctly.`, () => {
-      expect(random.seed).to.be.oneOf([seed, BigInt(seed)]);
-    });
-
-    it(`Expect new seed to be set correctly.`, () => {
-      random.seed = seed2;
-      expect(random.seed).to.be.oneOf([seed2, BigInt(seed2)]);
-    });
-  });
+  // Tests for seed initial setting + updating.
+  initialSeedTestFn(generator, [seed, seed2]);
+  seedSetTestFn(generator(seed), seed2);
 
   // Tests for the production of an exact sequence of numbers from the seed.
   exactSeqTestFn(generator(seed), testData, seed);

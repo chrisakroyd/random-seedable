@@ -1,6 +1,7 @@
-import chai from 'chai';
 import LCG from '../src/lcg.js';
 import {
+  initialSeedTestFn,
+  seedSetTestFn,
   exactSeqTestFn,
   resetTestFn,
   withinRangeTestFn,
@@ -11,8 +12,6 @@ import {
   uniqueItemTestFn,
   shuffleTestFn,
 } from './commonTests.js';
-
-const expect = chai.expect;
 
 // First ten numbers for seq 10 from cpp reference.
 const seed = 1234;
@@ -33,18 +32,9 @@ const lowerBound = 10;
 const generator = (genSeed) => new LCG(genSeed);
 
 describe('LCG Generator.', () => {
-  describe('Generator should be seeded with correct values.', () => {
-    const random = generator(seed);
-
-    it(`Expect initial seed to be set correctly.`, () => {
-      expect(random.seed).to.be.oneOf([seed, BigInt(seed)]);
-    });
-
-    it(`Expect new seed to be set correctly.`, () => {
-      random.seed = seed2;
-      expect(random.seed).to.be.oneOf([seed2, BigInt(seed2)]);
-    });
-  });
+  // Tests for seed initial setting + updating.
+  initialSeedTestFn(generator, [seed, seed2]);
+  seedSetTestFn(generator(seed), seed2);
 
   // Tests for the production of an exact sequence of numbers from the seed.
   exactSeqTestFn(generator(seed), testData, seed);

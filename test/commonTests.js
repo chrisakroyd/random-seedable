@@ -2,6 +2,27 @@ import chai from 'chai';
 
 const expect = chai.expect;
 
+export const initialSeedTestFn = (generator, seeds) => {
+  describe('Generator should be correctly seeded.', () => {
+    seeds.forEach((seed) => {
+      const random = generator(seed);
+      it(`Expect seed (${seed}) to be set correctly.`, () => {
+        expect(random.seed).to.be.oneOf([seed, BigInt(seed)]);
+      });
+    });
+  });
+};
+
+export const seedSetTestFn = (random, seed) => {
+  describe('Generator seed can be updated.', () => {
+    it('Should successfully update the seed.', () => {
+      expect(random.seed).to.not.be.oneOf([seed, BigInt(seed)]);
+      random.seed = seed;
+      expect(random.seed).to.be.oneOf([seed, BigInt(seed)]);
+    });
+  });
+}
+
 export const exactSeqTestFn = (random, data, seedVal) => {
   describe(`Generator seeded with ${seedVal} produces exact number sequence.`, () => {
     data.forEach((expectedNumber, index) => {
