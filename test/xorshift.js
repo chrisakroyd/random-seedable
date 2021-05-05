@@ -39,12 +39,12 @@ describe('XorShift generator 32 bit.', () => {
     const random = generator(seed);
 
     it(`Expect initial seed to be set correctly.`, () => {
-      expect(random.seed).to.equal(BigInt(seed));
+      expect(random.seed).to.be.oneOf([seed, BigInt(seed)]);
     });
 
     it(`Expect new seed to be set correctly.`, () => {
       random.seed = seed2;
-      expect(random.seed).to.equal(BigInt(seed2));
+      expect(random.seed).to.be.oneOf([seed2, BigInt(seed2)]);
     });
   });
 
