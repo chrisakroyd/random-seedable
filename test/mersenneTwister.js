@@ -13,7 +13,7 @@ import {
   shuffleTestFn,
   uniqueItemTestFn,
   withinRangeTestFn
-} from './commonTests.js';
+} from './common.js';
 
 const expect = chai.expect;
 

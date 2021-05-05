@@ -11,7 +11,7 @@ import {
   shuffleTestFn,
   initialSeedTestFn,
   seedSetTestFn,
-} from './commonTests.js';
+} from './common.js';
 
 // First twenty numbers from cpp reference.
 const seed = 1;

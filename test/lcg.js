@@ -11,7 +11,7 @@ import {
   arrayInitTestFn,
   uniqueItemTestFn,
   shuffleTestFn,
-} from './commonTests.js';
+} from './common.js';
 
 // First ten numbers for seq 10 from cpp reference.
 const seed = 1234;
