@@ -147,28 +147,19 @@ const nextStateData = [
   3576264772, 2903063865, 3505442042, 3518038711,
 ];
 
-const seed = 5489;
-const seed2 = 19650218;
-
+const generator = (genSeed) => new MersenneTwister(genSeed);
+const seeds = [5489, 19650218];
+const data = [testData, testData2];
 const numDraws = 2500;
 const upperBound = 25;
 const lowerBound = 10;
 
-const generator = (genSeed) => new MersenneTwister(genSeed);
-
 describe('Mersenne Twister Generator 32 bit.', () => {
-  testRunner({
-    generator,
-    seeds: [seed, seed2],
-    data:[testData, testData2],
-    numDraws,
-    lowerBound,
-    upperBound,
-  });
+  testRunner({ generator, seeds, data, numDraws, lowerBound, upperBound });
 
   describe('Generator state once initialised should match test data.', () => {
     it('Expect generator internal state to match reference copy.', () => {
-      const random = generator(seed);
+      const random = generator(seeds[0]);
       initialStateData.forEach((item, i) => {
         expect(random.state[i]).to.equal(BigInt(item));
       });
@@ -177,7 +168,7 @@ describe('Mersenne Twister Generator 32 bit.', () => {
 
   describe('Generator state should compute nextState() correctly.', () => {
     it('Expect generator internal state to mutate and match reference copy.', () => {
-      const random = generator(seed);
+      const random = generator(seeds[0]);
 
       random.nextState();
 
