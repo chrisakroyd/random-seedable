@@ -23,8 +23,8 @@ export const seedSetTestFn = (random, seed) => {
   });
 }
 
-export const exactSeqTestFn = (random, data, seedVal) => {
-  describe(`Generator seeded with ${seedVal} produces exact number sequence.`, () => {
+export const exactSeqTestFn = (random, data) => {
+  describe(`Generator seeded with ${random.seed} produces exact number sequence.`, () => {
     data.forEach((expectedNumber, index) => {
       it(`Expect number ${index} to equal ${expectedNumber}`, () => {
         expect(random.int()).to.equal(expectedNumber);
@@ -224,4 +224,49 @@ export const shuffleTestFn = (random, tolerance = 2, numDraws = 10, arraySize = 
       }
     });
   });
+};
+
+export const testRunner = ({ generator, seeds, data, numDraws, lowerBound, upperBound }) => {
+  if (!seeds.length === data.length) {
+    throw new Error('Mismatch in testing data lengths between seed and data.');
+  }
+
+  // Tests for seed initial setting + updating.
+  initialSeedTestFn(generator, seeds);
+  seedSetTestFn(generator(seeds[0]), seeds[1]);
+
+  // Tests for the production of an exact sequence of numbers from the seed.
+  seeds.forEach((seed, index) => {
+    exactSeqTestFn(generator(seed), data[index]);
+  });
+
+  // Tests for successful reset of the generator.
+  resetTestFn(generator(seeds[0]), data[0]);
+
+  // Test that the generator stays within the given bounds.
+  seeds.forEach((seed) => {
+    withinRangeTestFn(generator(seed), lowerBound, upperBound, numDraws);
+  })
+
+  // Test that generator actually produces floats.
+  seeds.forEach((seed) => {
+    floatGenTestFn(generator(seed), numDraws);
+  })
+
+  // Test that generator generates two different, exact sequences after being reseeded.
+  seedChangeTestFn(generator(seeds[0]), seeds[1], data[0], data[1]);
+
+  // Choice
+  seeds.forEach((seed, index) => {
+    choiceTestFn(generator(seed), data[index]);
+  });
+
+  // Array initialisation.
+  arrayInitTestFn(generator(seeds[0]), numDraws, lowerBound, upperBound);
+  uniqueItemTestFn(generator(seeds[0]));
+
+  // Array shuffling.
+  seeds.forEach((seed) => {
+    shuffleTestFn(generator(seed));
+  })
 };

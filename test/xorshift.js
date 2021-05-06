@@ -1,17 +1,5 @@
 import XORShift from '../src/xorshift.js';
-import {
-  arrayInitTestFn,
-  choiceTestFn,
-  exactSeqTestFn,
-  floatGenTestFn,
-  resetTestFn,
-  seedChangeTestFn,
-  withinRangeTestFn,
-  uniqueItemTestFn,
-  shuffleTestFn,
-  initialSeedTestFn,
-  seedSetTestFn,
-} from './common.js';
+import { testRunner } from './common.js';
 
 // First twenty numbers from cpp reference.
 const seed = 1;
@@ -34,34 +22,12 @@ const lowerBound = 10;
 const generator = (genSeed) => new XORShift(genSeed);
 
 describe('XorShift generator 32 bit.', () => {
-  // Tests for seed initial setting + updating.
-  initialSeedTestFn(generator, [seed, seed2]);
-  seedSetTestFn(generator(seed), seed2);
-
-  // Tests for the production of an exact sequence of numbers from the seed.
-  exactSeqTestFn(generator(seed), testData, seed);
-  exactSeqTestFn(generator(seed2), testData2, seed2);
-
-  // Tests for successful reset of the generator.
-  resetTestFn(generator(seed), testData);
-
-  // Test that the generator stays within the given bounds.
-  withinRangeTestFn(generator(seed), lowerBound, upperBound, numDraws);
-
-  // Test that generator actually produces floats.
-  floatGenTestFn(generator(seed), numDraws);
-
-  // Test that generator generates two different, exact sequences after being reseeded.
-  seedChangeTestFn(generator(seed), seed2, testData, testData2);
-
-  // Choice
-  choiceTestFn(generator(seed), testData);
-  choiceTestFn(generator(seed), testData2);
-
-  // Array initialisation.
-  arrayInitTestFn(generator(seed), numDraws, lowerBound, upperBound);
-  uniqueItemTestFn(generator(seed));
-
-  // Array shuffling.
-  shuffleTestFn(generator(seed));
+  testRunner({
+    generator,
+    seeds: [seed, seed2],
+    data:[testData, testData2],
+    numDraws,
+    lowerBound,
+    upperBound,
+  });
 });
