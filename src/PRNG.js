@@ -32,12 +32,16 @@ class PRNG {
     return BigInt(0);
   }
 
-  bigInt() {
-    return this._int();
+  bool() {
+    return this.float() > 0.5;
   }
 
   int() {
     return Number(this._int());
+  }
+
+  bigInt() {
+    return this._int();
   }
 
   float() {
@@ -95,6 +99,10 @@ class PRNG {
 
   initArray(size, mapFn) {
     return Array.from({ length: size }, mapFn);
+  }
+
+  boolArray(size) {
+    return this.initArray(size, () => this.bool());
   }
 
   intArray(size) {
