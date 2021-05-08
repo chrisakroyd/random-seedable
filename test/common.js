@@ -91,6 +91,20 @@ export const floatGenTestFn = (random, numDraws) => {
   });
 };
 
+export const boolGenTestFn = (random, numDraws, tolerance = 50) => {
+  describe('Generator produces booleans.', () => {
+    it('Expect generator to produce a boolean', () => {
+     expect(random.bool()).to.satisfy((bool) => typeof bool === 'boolean');
+    });
+
+    it(`Expect ${numDraws} of bool() to produce an array that is roughly half true and half false`, () => {
+      const trues = random.boolArray(numDraws).reduce((accumulator, currentValue) => accumulator + currentValue);
+      expect(trues).to.be.greaterThanOrEqual((numDraws / 2) - tolerance);
+      expect(trues).to.be.lessThanOrEqual((numDraws / 2) + tolerance);
+    });
+  });
+};
+
 export const seedChangeTestFn = (random, seed, data1, data2) => {
   describe('Generator should generate two different but exact sequences after seed change.', () => {
     it('Should produce exact number sequences after reseeding.', () => {
@@ -244,14 +258,13 @@ export const testRunner = ({ generator, seeds, data, numDraws, lowerBound, upper
   resetTestFn(generator(seeds[0]), data[0]);
 
   // Test that the generator stays within the given bounds.
-  seeds.forEach((seed) => {
-    withinRangeTestFn(generator(seed), lowerBound, upperBound, numDraws);
-  })
+  withinRangeTestFn(generator(seeds[0]), lowerBound, upperBound, numDraws);
+
+  // Test that generator actually produces bools.
+  boolGenTestFn(generator(seeds[0]), numDraws);
 
   // Test that generator actually produces floats.
-  seeds.forEach((seed) => {
-    floatGenTestFn(generator(seed), numDraws);
-  })
+  floatGenTestFn(generator(seeds[0]), numDraws);
 
   // Test that generator generates two different, exact sequences after being reseeded.
   seedChangeTestFn(generator(seeds[0]), seeds[1], data[0], data[1]);
