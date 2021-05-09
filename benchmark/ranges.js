@@ -61,5 +61,5 @@ export const debiasedIntegerMultiplication = (random, min, max) => {
     l = random.cast(m, 32);
   }
 
-  return m >> 32n;
+  return Number(BigInt(min) + (m >> 32n));
 };
