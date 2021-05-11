@@ -78,7 +78,7 @@ export const rangeTest = (data, random, lower, upper, numGen) => {
     const end = performance.now();
     const duration = end - start;
 
-    results.append(Object.assign({}, data, {duration}));
+    results.push(Object.assign({}, data[i], {duration}));
   }
 
   return results;

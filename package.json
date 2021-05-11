@@ -1,7 +1,7 @@
 {
   "name": "random-seedable",
   "version": "0.0.1",
-  "description": "",
+  "description": "Seedable random number generators backed by BigInts with common API.",
   "keywords": [],
   "main": "src/index.js",
   "type": "module",
@@ -9,6 +9,7 @@
     "test": "test"
   },
   "scripts": {
+    "benchmark": "node benchmark/index.js",
     "test": "mocha test/*.js --check-leaks",
     "coverage": "nyc mocha"
   },
