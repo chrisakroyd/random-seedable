@@ -1,3 +1,4 @@
+import { performance } from 'perf_hooks';
 import { MAX32 } from '../src/constants.js';
 
 // Benchmarking experiment for various range based methods
@@ -63,3 +64,22 @@ export const debiasedIntegerMultiplication = (random, min, max) => {
 
   return Number(BigInt(min) + (m >> 32n));
 };
+
+export const rangeTest = (data, random, lower, upper, numGen) => {
+  const results = [];
+
+  for (let i = 0; i < data.length; i++) {
+    const start = performance.now();
+
+    for (let j = 0; j < numGen; j++) {
+      data[i].gen(random, lower, upper);
+    }
+
+    const end = performance.now();
+    const duration = end - start;
+
+    results.append(Object.assign({}, data, {duration}));
+  }
+
+  return results;
+}
