@@ -2,7 +2,7 @@ import PRNG from './PRNG.js';
 import { MAX32 } from './constants.js';
 
 class XORShift extends PRNG {
-  constructor(seed, a = 13, b = 17, c = 5) {
+  constructor(seed = Date.now(), a = 13, b = 17, c = 5) {
     super(MAX32, BigInt(seed));
     this.seed = seed;
     this.a = this.cast(BigInt(a), 32);

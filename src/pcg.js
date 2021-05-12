@@ -2,7 +2,8 @@ import PRNG from './PRNG.js';
 import { MAX32 } from './constants.js';
 
 class PCG extends PRNG {
-  constructor(seed = 0x4d595df4d0f33173n, mul = 6364136223846793005n, inc = 1442695040888963407n) {
+  // constructor(seed = 0x4d595df4d0f33173n, mul = 6364136223846793005n, inc = 1442695040888963407n) {
+  constructor(seed = Date.now(), mul = 6364136223846793005n, inc = 1442695040888963407n) {
     super(MAX32, BigInt(seed));
     this.seed = seed;
     this.mul = this.cast(BigInt(mul), 64);

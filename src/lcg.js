@@ -1,7 +1,7 @@
 import PRNG from './PRNG.js';
 
 class LCG extends PRNG {
-  constructor(seed, a = 1664525, c = 1013904223, m = 4294967296) {
+  constructor(seed = Date.now(), a = 1664525, c = 1013904223, m = 4294967296) {
     super(m, seed);
     [seed, a, c, m].forEach(num => this.checkNum(num));
     this.seed = seed;

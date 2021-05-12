@@ -11,7 +11,7 @@ const LOWER_MASK = 0x7fffffffn; /* least significant r bits */
 // https://gitlab.com/rockerest/fast-mersenne-twister/-/blob/master/mersenne.js
 
 class MersenneTwister extends PRNG {
-  constructor(seed, n = 624, m = 397) {
+  constructor(seed = Date.now(), n = 624, m = 397) {
     super(MAX32, BigInt(seed));
     this.state = new Array(n);
     this.N = n;
