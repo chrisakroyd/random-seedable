@@ -1,4 +1,4 @@
-import { XORWow } from '../src/index.js';
+import { XORWow, LCG, MersenneTwister, PCG, XORShift } from '../src/index.js';
 import { MAX32 } from '../src/constants.js';
 import {
   debiasedIntegerMultiplication,
@@ -7,6 +7,7 @@ import {
   divisionWithRejection,
   modulo, rangeTest
 } from './ranges.js';
+import { generatorTest, MathRandomGen } from './generator.js';
 
 const resultLogger = (testType, results) => {
   console.log(`Benchmark results for ${testType}`);
@@ -36,4 +37,19 @@ export const rangeBenchmark = (numGen = 10000) => {
   resultLogger('LOw range generation', lowRange);
 };
 
+export const generatorBenchmark = (numGen = 10000) => {
+  const data = [
+    { name: 'LCG', gen: new LCG(1234), },
+    { name: 'PCG', gen: new PCG(0x4d595df4d0f33173n), },
+    { name: 'Mersenne Twister', gen: new MersenneTwister(5489), },
+    { name: 'Xorshift', gen: new XORShift(11234), },
+    { name: 'XorWow', gen: new XORWow(123456789), },
+    { name: 'Math.Random() Generator', gen: new MathRandomGen(), },
+  ];
+
+  const generatorResults = generatorTest(data, numGen);
+  resultLogger('Generator performance benchmark', generatorResults);
+};
+
+generatorBenchmark();
 rangeBenchmark();
