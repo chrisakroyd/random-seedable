@@ -79,10 +79,10 @@ class PRNG {
     return array[this.randBelow(array.length)];
   }
 
-  shuffle(array, inplace = true) {
+  shuffle(array, inPlace = true) {
     let toSort = array;
 
-    if (!inplace) {
+    if (!inPlace) {
       toSort = Array.from(toSort);
     }
 

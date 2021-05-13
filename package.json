@@ -7,11 +7,16 @@
     "Xorshift",
     "LCG",
     "random",
+    "number",
+    "generator",
     "seedable",
     "random-seedable",
     "PCG",
     "Mersenne",
-    "Twister"
+    "Twister",
+    "pseudorandom",
+    "prng",
+    "rng"
   ],
   "main": "src/index.js",
   "type": "module",
