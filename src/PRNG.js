@@ -33,7 +33,7 @@ class PRNG {
   }
 
   bool() {
-    return this.float() > 0.5;
+    return this.float() >= 0.5;
   }
 
   int() {
