@@ -6,10 +6,11 @@ Each implements a standard API producing number distributions that exactly match
 ## Highlights
 
 - Avoids the state overflow problems that plague other javascript implemented random number generators.
-- Matches the output of original authored c/c++ implementations for all algorithms.
+- Matches the output of original authored C/C++ implementations for all algorithms.
 - Simple, common API to all generators.
 - Light footprint.
 - Browser support.
+- ES Style module.
 
 ## Install
 
@@ -18,9 +19,45 @@ npm install random-seedable --save
 ```
 
 ## Getting Started
+Just want to use a random generator with no hassle? All you've got to do is import random, and use it
+as you would a generator you initialised yourself.
+
+
+Simply import random and call whatever method you please, 
+```js
+import random from 'random-seedable';
+
+random.bool(); // false
+random.int(); // 2346
+random.float(); // 0.34527
+random.shuffle([1, 2, 3, 1, 4]); // [2, 4, 3, 1, 1]
+random.choice([1, 2, 3, 1, 4]); // 2
+```
+
+Want a random generator with a seed you can set? Just import the generator you wish and initialise it yourself.
 
 ```js
+import { XorShift } from 'random-seedable';
 
+const random = new XorShift(123456789);
+random.int(); // 123312
+random.bool(); // true
+random.shuffle([1, 2, 3, 1, 4]); // [2, 4, 3, 1, 1]
+random.choice([1, 2, 3, 1, 4]); // 2
+```
+
+Once the generator is initialised, the seed can be changed using the seed setter function.
+
+```js
+import { XorShift } from 'random-seedable';
+
+const random = new XorShift(123456789);
+
+console.log(random.seed); // 123456789
+
+random.seed = 987654321;
+
+console.log(random.seed); // 987654321
 ```
 
 ## Condensed Documentation

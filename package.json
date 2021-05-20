@@ -1,7 +1,7 @@
 {
   "name": "random-seedable",
-  "version": "0.0.1",
-  "description": "Seedable random number generators backed by BigInts with common API.",
+  "version": "1.0.0",
+  "description": "Fully-fledged collection of seedable random number generators whose output precisely matches their original c/c++ implementations.",
   "keywords": [
     "Xorwow",
     "Xorshift",
