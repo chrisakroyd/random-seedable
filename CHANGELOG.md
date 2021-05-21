@@ -1,9 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.0.1 - [Unreleased] 
+## [1.0.1] - Fixed coverage command (21/05/2021)
 
-## [1.0.0] - Initial release () 
+### Changed
+- Fixed coverage command as istanbul/nyc doesn't work with es modules by default.
+
+## [1.0.0] - Initial release (20/05/2021) 
 
 ### Added
 - 32 bit Mersenne Twister.
@@ -17,4 +20,5 @@ All notable changes to this project will be documented in this file.
 - Shuffle and choice functions.
 
 [Unreleased]: https://github.com/chrisakroyd/random-seedable
-[1.0.0]: https://github.com/chrisakroyd/random-seedable
+[1.0.1]: https://github.com/chrisakroyd/random-seedable
+[1.0.0]: https://github.com/chrisakroyd/random-seedable/tree/3ba050fef7021e8996e0ccfd6645fbb45cf83343
