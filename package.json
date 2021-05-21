@@ -21,12 +21,16 @@
   "main": "src/index.js",
   "type": "module",
   "directories": {
-    "test": "test"
+    "test": "test",
+    "src": "src",
+    "reference": "reference",
+    "benchmark": "benchmark",
+    "example": "examples"
   },
   "scripts": {
     "benchmark": "node benchmark/index.js",
-    "test": "mocha test/*.js --check-leaks",
-    "coverage": "nyc mocha"
+    "test": "mocha test/*.js",
+    "coverage": "nyc mocha --experimental-loader=@istanbuljs/esm-loader-hook"
   },
   "repository": {
     "type": "git",
@@ -38,8 +42,8 @@
     "url": "https://github.com/ChrisAkroyd/random-seedable/issues"
   },
   "homepage": "https://github.com/ChrisAkroyd/random-seedable#readme",
-  "dependencies": {},
   "devDependencies": {
+    "@istanbuljs/esm-loader-hook": "^0.1.2",
     "chai": "^4.3.4",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0"
