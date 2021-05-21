@@ -29,7 +29,6 @@ class PCG extends PRNG {
 
   _int() {
     let x = this.x;
-    // console.log(x);
     let count = x >> 59n; // 59 = 64 - 5
     this.x = x * this.mul + this.inc;
     this.x = this.cast(this.x, 64);

@@ -4,20 +4,20 @@ import {
   debiasedModuloOnce,
   debiasedModuloTwice,
   debiasedIntegerMultiplication,
-  divisionWithRejection
+  divisionWithRejection,
 } from '../benchmark/ranges.js';
 import { XORWow } from '../src/index.js';
 
-const expect = chai.expect;
+const { expect } = chai;
 
 describe('Benchmarking sanity tests', () => {
   describe('Random range methods ', () => {
     const rangeFuncs = [
       { name: 'Modulo', gen: modulo },
-      { name: 'Debiased modulo (once)', gen: debiasedModuloOnce, },
-      { name: 'Debiased modulo (twice)', gen: debiasedModuloTwice, },
-      { name: 'Debiased integer multiplication', gen: debiasedIntegerMultiplication, },
-      { name: 'Division with rejection', gen: divisionWithRejection, }
+      { name: 'Debiased modulo (once)', gen: debiasedModuloOnce },
+      { name: 'Debiased modulo (twice)', gen: debiasedModuloTwice },
+      { name: 'Debiased integer multiplication', gen: debiasedIntegerMultiplication },
+      { name: 'Division with rejection', gen: divisionWithRejection },
     ];
 
     const lowerBound = 8;

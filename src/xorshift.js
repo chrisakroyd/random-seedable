@@ -24,7 +24,7 @@ class XORShift extends PRNG {
   }
 
   _int() {
-    let x = this.x;
+    let { x } = this;
     x ^= x << this.a;
     // Recast to uint32. BigInt on a left shift will always shift and keep digits regardless
     // of previous casting. Therefore re-cast is necessary to ensure code behaves the same w/r to _seed c behaviour.

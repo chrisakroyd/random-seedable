@@ -1,6 +1,6 @@
 import chai from 'chai';
 
-const expect = chai.expect;
+const { expect } = chai;
 
 export const initialSeedTestFn = (generator, seeds) => {
   describe('Generator should be correctly seeded.', () => {
@@ -21,7 +21,7 @@ export const seedSetTestFn = (random, seed) => {
       expect(random.seed).to.be.oneOf([seed, BigInt(seed)]);
     });
   });
-}
+};
 
 export const exactSeqTestFn = (random, data) => {
   describe(`Generator seeded with ${random.seed} produces exact number sequence.`, () => {
@@ -94,7 +94,7 @@ export const floatGenTestFn = (random, numDraws) => {
 export const boolGenTestFn = (random, numDraws, tolerance = 50) => {
   describe('Generator produces booleans.', () => {
     it('Expect generator to produce a boolean', () => {
-     expect(random.bool()).to.satisfy((bool) => typeof bool === 'boolean');
+      expect(random.bool()).to.satisfy((bool) => typeof bool === 'boolean');
     });
 
     it(`Expect ${numDraws} of bool() to produce an array that is roughly half true and half false`, () => {
@@ -232,7 +232,7 @@ export const shuffleTestFn = (random, tolerance = 2, numDraws = 10, arraySize = 
     it(`Expect fewer than ${tolerance} numbers to be in the same place for ${numDraws} runs.`, () => {
       for (let i = 0; i < numDraws; i++) {
         const intArray = random.intArray(arraySize);
-        const shuffledArray = random.shuffle(intArray, false);  // Shuffle a cloned array as shuffle is in place
+        const shuffledArray = random.shuffle(intArray, false); // Shuffle a cloned array as shuffle is in place
         const sameCount = samePosition(intArray, shuffledArray);
         expect(sameCount).to.be.lessThanOrEqual(tolerance);
       }
@@ -240,7 +240,9 @@ export const shuffleTestFn = (random, tolerance = 2, numDraws = 10, arraySize = 
   });
 };
 
-export const testRunner = ({ generator, seeds, data, numDraws, lowerBound, upperBound }) => {
+export const testRunner = ({
+  generator, seeds, data, numDraws, lowerBound, upperBound,
+}) => {
   if (!seeds.length === data.length) {
     throw new Error('Mismatch in testing data lengths between seed and data.');
   }
@@ -281,5 +283,5 @@ export const testRunner = ({ generator, seeds, data, numDraws, lowerBound, upper
   // Array shuffling.
   seeds.forEach((seed) => {
     shuffleTestFn(generator(seed));
-  })
+  });
 };

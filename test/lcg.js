@@ -17,5 +17,7 @@ const upperBound = 25;
 const lowerBound = 10;
 
 describe('LCG Generator.', () => {
-  testRunner({ generator, seeds, data, numDraws, lowerBound, upperBound });
+  testRunner({
+    generator, seeds, data, numDraws, lowerBound, upperBound,
+  });
 });

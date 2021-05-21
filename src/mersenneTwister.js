@@ -28,7 +28,7 @@ class MersenneTwister extends PRNG {
   }
 
   set seed(seed) {
-    this._seed = this.cast(BigInt(seed), 32)
+    this._seed = this.cast(BigInt(seed), 32);
     this.state[0] = this._seed & 0xffffffffn;
 
     for (let j = 1; j < this.N; j++) {
@@ -37,17 +37,17 @@ class MersenneTwister extends PRNG {
       /* In the previous versions, MSBs of the seed affect   */
       /* only MSBs of the array state[].                        */
       /* 2002/01/09 modified by Makoto Matsumoto             */
-      this.state[j] &= 0xffffffffn;  /* for >32 bit machines */
+      this.state[j] &= 0xffffffffn; /* for >32 bit machines */
     }
     this.initf = 1;
   }
 
   mixBits(u, v) {
-    return ( ((u) & UPPER_MASK) | ((v) & LOWER_MASK) );
+    return (((u) & UPPER_MASK) | ((v) & LOWER_MASK));
   }
 
   twist(u, v) {
-    return ((this.mixBits(u, v) >> 1n) ^ ((v) & 1n ? MATRIX_A : 0n))
+    return ((this.mixBits(u, v) >> 1n) ^ ((v) & 1n ? MATRIX_A : 0n));
   }
 
   nextState() {
@@ -61,7 +61,7 @@ class MersenneTwister extends PRNG {
       this.state[j] = this.state[j + (this.M - this.N)] ^ this.twist(this.state[j], this.state[j + 1]);
     }
 
-    this.state[this.N - 1] = this.state[this.M - 1] ^ this.twist(this.state[this.N - 1], this.state[0])
+    this.state[this.N - 1] = this.state[this.M - 1] ^ this.twist(this.state[this.N - 1], this.state[0]);
     this.stateIndex = 0;
     this.initf = 0;
   }

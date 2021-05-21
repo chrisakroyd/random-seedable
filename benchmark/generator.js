@@ -3,9 +3,9 @@ import { MAX32 } from '../src/constants.js';
 
 // Benchmark generator for relative comparisons.
 export class MathRandomGen {
- int() {
-   Math.floor(Math.random() * MAX32);
- }
+  int() {
+    Math.floor(Math.random() * MAX32);
+  }
 }
 
 export const generatorTest = (data, numGen) => {
@@ -21,8 +21,8 @@ export const generatorTest = (data, numGen) => {
     const end = performance.now();
     const duration = end - start;
 
-    results.push(Object.assign({}, data[i], {duration}));
+    results.push({ ...data[i], duration });
   }
 
   return results;
-}
+};

@@ -2,7 +2,7 @@ import { MAX32 } from './constants.js';
 
 /**
  * Superclass for all implemented generators.
-**/
+* */
 class PRNG {
   constructor(max, seed) {
     this.max = max;
@@ -52,7 +52,7 @@ class PRNG {
     const a = this.int() >>> 5;
     const b = this.int() >>> 6;
 
-    return ( a * 67108864.0 + b ) * ( 1.0 / 9007199254740992.0 );
+    return (a * 67108864.0 + b) * (1.0 / 9007199254740992.0);
   }
 
   randRange(min, max) {
@@ -61,7 +61,7 @@ class PRNG {
     // https://peteroupc.github.io/randomnotes.html
     // https://www.pcg-random.org/posts/bounded-rands.html
     const range = max - min;
-    const t = MAX32 % range
+    const t = MAX32 % range;
     let r = this.int();
 
     while (r < t) {
@@ -86,8 +86,8 @@ class PRNG {
       toSort = Array.from(toSort);
     }
 
-   // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle.
-   for (let i = toSort.length - 1; i > 0; i--) {
+    // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle.
+    for (let i = toSort.length - 1; i > 0; i--) {
       const j = this.randRange(0, i);
       const temp = toSort[i];
       toSort[i] = toSort[j];
@@ -95,7 +95,7 @@ class PRNG {
     }
 
     return toSort;
-  };
+  }
 
   initArray(size, mapFn) {
     return Array.from({ length: size }, mapFn);

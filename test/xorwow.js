@@ -19,5 +19,7 @@ const upperBound = 25;
 const lowerBound = 10;
 
 describe('XorWow generator 32 bit.', () => {
-  testRunner({ generator, seeds, data, numDraws, lowerBound, upperBound });
+  testRunner({
+    generator, seeds, data, numDraws, lowerBound, upperBound,
+  });
 });

@@ -1,6 +1,6 @@
 {
   "name": "random-seedable",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fully-fledged collection of seedable random number generators whose output precisely matches their original c/c++ implementations.",
   "keywords": [
     "Xorwow",
@@ -45,6 +45,8 @@
   "devDependencies": {
     "@istanbuljs/esm-loader-hook": "^0.1.2",
     "chai": "^4.3.4",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.23.2",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0"
   },
