@@ -1,5 +1,6 @@
 # random-seedable
 [![Coverage Status](https://coveralls.io/repos/github/chrisakroyd/random-seedable/badge.svg?branch=main)](https://coveralls.io/github/chrisakroyd/random-seedable?branch=main)
+[![npm version](https://badge.fury.io/js/random-seedable.svg)](https://badge.fury.io/js/random-seedable)
 
 Fully-fledged random number generator library with high quality implementations of Xorshift, Xorwow, Mersenne Twister, PCG and LCG.
 Each implements a standard API producing number distributions that exactly match the original implementations.
