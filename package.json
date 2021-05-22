@@ -8,6 +8,7 @@
     "LCG",
     "random",
     "number",
+    "numbers",
     "generator",
     "seedable",
     "random-seedable",
@@ -30,7 +31,7 @@
   "scripts": {
     "benchmark": "node benchmark/index.js",
     "test": "mocha test/*.js",
-    "coverage": "nyc mocha --experimental-loader=@istanbuljs/esm-loader-hook"
+    "coverage": "nyc --reporter=lcov mocha --experimental-loader=@istanbuljs/esm-loader-hook"
   },
   "repository": {
     "type": "git",
