@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Fixed linting.
+- Fixed lcov output reporting.
+- Fixed coveralls.
 
 ## [1.0.1] - Fixed coverage command (21/05/2021)
 
