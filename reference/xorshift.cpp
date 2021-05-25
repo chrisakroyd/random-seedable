@@ -6,7 +6,7 @@ using namespace std;
 // https://en.wikipedia.org/wiki/Xorshift
 
 struct xor_state {
-    uint32_t x, a, b, c;
+    uint32_t x;
 };
 
 uint32_t xor_shift_32(xor_state& state) {
@@ -23,9 +23,6 @@ int main()
     struct xor_state state;
 
     state.x = 1;
-    state.a = 13;
-    state.b = 17;
-    state.c = 5;
 
     int i;
     int a = 10;
