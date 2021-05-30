@@ -1,5 +1,6 @@
 import chai from 'chai';
 import {
+  rangeTest,
   modulo,
   debiasedModuloOnce,
   debiasedModuloTwice,
@@ -7,6 +8,7 @@ import {
   divisionWithRejection,
 } from '../benchmark/ranges.js';
 import { XORWow } from '../src/index.js';
+import { MAX32 } from '../src/constants.js';
 
 const { expect } = chai;
 
@@ -35,6 +37,16 @@ describe('Benchmarking sanity tests', () => {
           expect(randNum).to.be.lessThanOrEqual(upperBound);
         }
       });
+    });
+  });
+
+  describe('Range benchmark runner test', () => {
+    const random = new XORWow(123456789);
+    // Wide-range test.
+    const wideRange = rangeTest([{ name: 'Debiased', gen: debiasedIntegerMultiplication }], random, 0, MAX32, 500);
+    wideRange.forEach((result) => {
+      expect(result.name).to.equal('Debiased');
+      expect(result.duration).to.be.a('number');
     });
   });
 });
