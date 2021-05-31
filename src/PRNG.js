@@ -1,5 +1,3 @@
-import { MAX32 } from './constants.js';
-
 /**
  * Superclass for all implemented generators.
 * */
@@ -61,7 +59,7 @@ class PRNG {
     // https://peteroupc.github.io/randomnotes.html
     // https://www.pcg-random.org/posts/bounded-rands.html
     const range = max - min;
-    const t = MAX32 % range;
+    const t = this.max % range;
     let r = this.int();
 
     while (r < t) {
