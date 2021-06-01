@@ -33,6 +33,16 @@ export const exactSeqTestFn = (random, data) => {
   });
 };
 
+export const bigIntExactSeqFn = (random, data) => {
+  describe(`Generator seeded with ${random.seed} produces exact BigInt number sequence.`, () => {
+    data.forEach((expectedNumber, index) => {
+      it(`Expect number ${index} to equal ${expectedNumber}`, () => {
+        expect(random.bigInt()).to.equal(expectedNumber);
+      });
+    });
+  });
+};
+
 export const resetTestFn = (random, data) => {
   describe('Generator to produce exact number sequence pre and post reset.', () => {
     const preReset = data.map(() => random.int());
@@ -241,7 +251,7 @@ export const shuffleTestFn = (random, tolerance = 2, numDraws = 10, arraySize = 
 };
 
 export const testRunner = ({
-  generator, seeds, data, numDraws, lowerBound, upperBound,
+  generator, seeds, data, numDraws, lowerBound, upperBound, bit64 = false,
 }) => {
   if (!seeds.length === data.length) {
     throw new Error('Mismatch in testing data lengths between seed and data.');
@@ -251,13 +261,36 @@ export const testRunner = ({
   initialSeedTestFn(generator, seeds);
   seedSetTestFn(generator(seeds[0]), seeds[1]);
 
-  // Tests for the production of an exact sequence of numbers from the seed.
-  seeds.forEach((seed, index) => {
-    exactSeqTestFn(generator(seed), data[index]);
-  });
 
-  // Tests for successful reset of the generator.
-  resetTestFn(generator(seeds[0]), data[0]);
+  // TODO: Cleanup the 64bit tests.
+  if (bit64) {
+    seeds.forEach((seed, index) => {
+      bigIntExactSeqFn(generator(seed), data[index]);
+    });
+
+    const shifted1 = data[0].map((elem) => Number(elem >> 11n));
+    const shifted2 = data[1].map((elem) => Number(elem >> 11n));
+
+    exactSeqTestFn(generator(seeds[0]), shifted1);
+    exactSeqTestFn(generator(seeds[1]), shifted2);
+
+    // Tests for successful reset of the generator.
+    resetTestFn(generator(seeds[0]), shifted1);
+
+    // Test that generator generates two different, exact sequences after being reseeded.
+    seedChangeTestFn(generator(seeds[0]), seeds[1], shifted1, shifted2);
+  } else {
+    // Tests for the production of an exact sequence of numbers from the seed.
+    seeds.forEach((seed, index) => {
+      exactSeqTestFn(generator(seed), data[index]);
+    });
+
+    // Tests for successful reset of the generator.
+    resetTestFn(generator(seeds[0]), data[0]);
+
+    // Test that generator generates two different, exact sequences after being reseeded.
+    seedChangeTestFn(generator(seeds[0]), seeds[1], data[0], data[1]);
+  }
 
   // Test that the generator stays within the given bounds.
   withinRangeTestFn(generator(seeds[0]), lowerBound, upperBound, numDraws);
@@ -267,9 +300,6 @@ export const testRunner = ({
 
   // Test that generator actually produces floats.
   floatGenTestFn(generator(seeds[0]), numDraws);
-
-  // Test that generator generates two different, exact sequences after being reseeded.
-  seedChangeTestFn(generator(seeds[0]), seeds[1], data[0], data[1]);
 
   // Choice
   seeds.forEach((seed, index) => {
