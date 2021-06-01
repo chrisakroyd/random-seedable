@@ -6,6 +6,8 @@ class PRNG64 extends PRNG {
   }
 
   int() {
+    // Javascript only has 2 ** 53 integer positions, take 64 bit output and only take the upper 53 bits for use
+    // as our output Number in int mode.
     return Number(this._int() >> 11n);
   }
 
