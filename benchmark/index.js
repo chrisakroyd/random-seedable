@@ -1,5 +1,5 @@
 import {
-  XORWow, LCG, MersenneTwister, PCG, XORShift,
+  XORWow, LCG, MersenneTwister, PCG, XORShift, XORShift64, XORShift128, XORShift128Plus
 } from '../src/index.js';
 import { MAX32 } from '../src/constants.js';
 import {
@@ -45,6 +45,9 @@ export const generatorBenchmark = (numGen = 10000) => {
     { name: 'PCG', gen: new PCG(0x4d595df4d0f33173n) },
     { name: 'Mersenne Twister', gen: new MersenneTwister(5489) },
     { name: 'Xorshift', gen: new XORShift(11234) },
+    { name: 'Xorshift64', gen: new XORShift64(11234) },
+    { name: 'Xorshift128', gen: new XORShift128(11234) },
+    { name: 'Xorshift128+', gen: new XORShift128Plus(11234) },
     { name: 'XorWow', gen: new XORWow(123456789) },
     { name: 'Math.Random() Generator', gen: new MathRandomGen() },
   ];

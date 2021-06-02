@@ -1,5 +1,5 @@
 import { testRunner } from './common.js';
-import XORShift128Plus from '../src/XORShift128Plus.js';
+import XORShift128Plus from '../src/xorshift128Plus.js';
 
 const testData = [485892858n, 1035630585790222n, 3707035798309740n, 17527141897735428608n,
   1683502627637756146n, 9382191708620632344n, 782982527655837513n, 13069191919789080888n,
