@@ -1,4 +1,4 @@
-import chai from 'chai';
+import { expect } from 'chai';
 import {
   rangeTest,
   modulo,
@@ -9,8 +9,6 @@ import {
 } from '../benchmark/ranges.js';
 import { XORWow } from '../src/index.js';
 import { MAX32 } from '../src/constants.js';
-
-const { expect } = chai;
 
 describe('Benchmarking sanity tests', () => {
   describe('Random range methods ', () => {
@@ -30,7 +28,7 @@ describe('Benchmarking sanity tests', () => {
       const random = new XORWow(123456789);
 
       it(`Expect ${range.name} function to stay within the range ${lowerBound} - ${upperBound}`, () => {
-        for (let i = 0; i < numDraws; i++) {
+        for (let i = 0; i < numDraws; i += 1) {
           const randNum = range.gen(random, lowerBound, upperBound);
           expect(randNum).to.not.equal(undefined);
           expect(randNum).to.be.greaterThanOrEqual(lowerBound);

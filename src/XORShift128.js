@@ -1,7 +1,7 @@
 import PRNG from './PRNG.js';
 import { MAX32 } from './constants.js';
 
-class XorShift128 extends PRNG {
+class XORShift128 extends PRNG {
   constructor(seed = Date.now(), y = 362436069, z = 521288629, w = 88675123) {
     super(MAX32, BigInt(seed));
     this.seed = seed;
@@ -43,4 +43,4 @@ class XorShift128 extends PRNG {
   }
 }
 
-export default XorShift128;
+export default XORShift128;

@@ -1,6 +1,4 @@
-import chai from 'chai';
-
-const { expect } = chai;
+import { expect } from 'chai';
 
 export const initialSeedTestFn = (generator, seeds) => {
   describe('Generator should be correctly seeded.', () => {
@@ -267,7 +265,6 @@ export const testRunner = ({
     seeds.forEach((seed, index) => {
       bigIntExactSeqFn(generator(seed), data[index]);
     });
-
     const shifted1 = data[0].map((elem) => Number(elem >> 11n));
     const shifted2 = data[1].map((elem) => Number(elem >> 11n));
 

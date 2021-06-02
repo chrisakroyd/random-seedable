@@ -1,7 +1,5 @@
 import PRNG from '../src/PRNG.js';
-import chai from 'chai';
-
-const { expect } = chai;
+import { expect } from 'chai';
 
 const max = 235424;
 const seed = 123123;
