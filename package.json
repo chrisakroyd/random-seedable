@@ -1,7 +1,7 @@
 {
   "name": "random-seedable",
-  "version": "1.0.2",
-  "description": "Fully-fledged collection of seedable random number generators whose output precisely matches their original c/c++ implementations.",
+  "version": "1.0.3",
+  "description": "Fully-fledged collection of both 32 and 64 bit seedable random number generators whose output precisely matches their original c/c++ implementations.",
   "keywords": [
     "Xorwow",
     "Xorshift",
@@ -11,13 +11,22 @@
     "numbers",
     "generator",
     "seedable",
+    "seed",
     "random-seedable",
     "PCG",
     "Mersenne",
     "Twister",
     "pseudorandom",
     "prng",
-    "rng"
+    "rng",
+    "plus",
+    "128",
+    "64",
+    "32",
+    "bit",
+    "Xorshift64",
+    "Xorshift128",
+    "Xorshift128+"
   ],
   "main": "src/index.js",
   "type": "module",

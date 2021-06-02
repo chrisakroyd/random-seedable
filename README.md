@@ -2,13 +2,14 @@
 [![Coverage Status](https://coveralls.io/repos/github/chrisakroyd/random-seedable/badge.svg?branch=main)](https://coveralls.io/github/chrisakroyd/random-seedable?branch=main)
 [![npm version](https://badge.fury.io/js/random-seedable.svg)](https://badge.fury.io/js/random-seedable)
 
-Fully-fledged random number generator library with high quality implementations of Xorshift, Xorwow, Mersenne Twister, PCG and LCG.
+Fully-fledged random number generator library offering both 32 bit and 64 bit high quality implementations of Xorshift, Xorwow, Mersenne Twister, PCG, and LCG.
 Each implements a standard API producing number distributions that exactly match the original implementations.
 
 ## Highlights
 
 - Avoids the state overflow problems that plague other javascript implemented random number generators.
 - Matches the output of original authored C/C++ implementations for all algorithms.
+- 32 bit and 64 bit generators.
 - Simple, common API to all generators.
 - Light footprint.
 - Browser support.
@@ -68,14 +69,17 @@ console.log(random.seed); // 987654321
 
 Supported PRNGs and their default initialisations.
 
-| Class   |   Default Initialisation |
-| -----------| ------ |
-| [LCG](#LCG)  |```new LCG(Date.now(), 1664525, 1013904223, 4294967296);``` |
-| [PCG](#PCG)  |  ```new PCG(Date.now(), 6364136223846793005n, 1442695040888963407n);``` |
-| [MersenneTwister](#MersenneTwister)  |  ```new MersenneTwister(Date.now(), 624, 397);``` |
-| [XorShift](#XorShift)   | ```new XorShift(Date.now(), 13, 17, 5);``` |
-| [XorWow](#XorWow)   | ```new XorWow(Date.now(), 362436069, 521288629, 88675123, 5783321, 6615241, 362437);``` |
-| [random](#random)   | ```default PRNG, same as XorWow``` |
+| Class   |   Default Initialisation |   Integer output |
+| -----------| ------ | ------ |
+| [LCG](#LCG)  |```new LCG(Date.now(), 1664525, 1013904223, 4294967296);``` | 32 bit |
+| [PCG](#PCG)  |  ```new PCG(Date.now(), 6364136223846793005n, 1442695040888963407n);``` | 32 bit |
+| [MersenneTwister](#MersenneTwister)  |  ```new MersenneTwister(Date.now(), 624, 397);``` | 32 bit |
+| [XORShift](#XORShift)   | ```new XORShift(Date.now(), 13, 17, 5);``` | 32 bit |
+| [XORShift64](#XORShift64)   | ```new XORShift64(Date.now(), 13, 7, 17);``` | 64 bit |
+| [XORShift128](#XORShift128)   | ```new XORShift128(Date.now(), 362436069, 521288629, 88675123);``` | 32 bit |
+| [XORShift128Plus](#XORShift128Plus)   | ```new XORShift128Plus(Date.now(), 362436069);``` | 64 bit |
+| [XORWow](#XORWow)   | ```new XORWow(Date.now(), 362436069, 521288629, 88675123, 5783321, 6615241, 362437);``` | 32 bit |
+| [random](#random)   | ```default PRNG, same as XorWow``` | 64 bit |
 
 ### PRNG methods.
 
@@ -104,7 +108,7 @@ Each PRNG has the following methods.
 ### LCG
 
 Linear Congruential Generator (LCG) is a simple generator originally devised in 1951, if you need 
-something quick with minimal memory usage and not the best quality randomness, this is for you.
+something quick with minimal memory usage and not the best quality randomness, this is for you. 32 bits of output.
 
 ##### Parameters
 
@@ -124,7 +128,7 @@ const random = new LCG(1234, 1664525, 1013904223, 4294967296);
 
 Permuted Congruential Generator (LCG) is again, a relatively simple generator that improves on the qualites
 of LCG by improving its randomness quality by increasing its state size and using only the most significant bits
-to produce the output.
+to produce the output. 32 bits of output.
 
 ##### Parameters
 
@@ -142,7 +146,7 @@ const random = new PCG(0x4d595df4d0f33173n, 6364136223846793005n, 14426950408889
 ### MersenneTwister
 
 Mersenne Twister is a widely used PRNG, most well known for being the Python and Excel default with an extremely large
-state.
+state. 32 bits of output.
 ##### Parameters
 
 - seed -> Initial seed.
@@ -156,9 +160,10 @@ const random = new MersenneTwister(5489, 624, 397);
 
 ---
 
-### XorShift
+### XORShift
 
-XorShift generators are fast, efficient generators with good randomness quality. 
+XorShift generators are fast, efficient generators with good randomness quality. This generator has 32 bit
+output with 32 bits of internal state.
 
 ##### Parameters
 
@@ -169,14 +174,68 @@ XorShift generators are fast, efficient generators with good randomness quality.
 
 ##### Example
 ```js
-const random = new XorShift(11234, 13, 17, 5);
+const random = new XORShift(11234, 13, 17, 5);
 ```
 
 ---
 
-### XorWow
+### XORShift64
 
-XorWow is an improved version of XorShift and default generator of Nvidia CUDA.
+XorShift generators are fast, efficient generators with good randomness quality. This implementation
+has 64 bit output with 64 bits of internal state.
+
+##### Parameters
+
+- seed -> Initial seed.
+- a -> First bit shift parameter.
+- b -> Second bit shift parameter.
+- c -> Third bit shift parameter.
+
+##### Example
+```js
+const random = new XORShift64(11234, 13, 7, 17);
+```
+
+---
+
+### XORShift128
+
+XorShift generators are fast, efficient generators with good randomness quality. This implementation
+has 32 bit output with 128 bits of internal state.
+
+##### Parameters
+
+- seed -> Initial seed.
+- y -> First bit shift parameter.
+- z -> Second bit shift parameter.
+- w -> Third bit shift parameter.
+
+##### Example
+```js
+const random = new XORShift128(Date.now(), 362436069, 521288629, 88675123);
+```
+
+---
+
+### XORShift128Plus
+
+XorShift generators are fast, efficient generators with good randomness quality. 64 bits of output with 128 internal state.
+
+##### Parameters
+
+- seed -> Initial seed.
+- y -> Second seed.
+
+##### Example
+```js
+const random = new XORShift128Plus(Date.now(), 362436069);
+```
+
+---
+
+### XORWow
+
+XorWow is an improved version of XorShift and default generator of Nvidia CUDA. 32 bits of output.
 
 ##### Parameters
 
@@ -190,7 +249,7 @@ XorWow is an improved version of XorShift and default generator of Nvidia CUDA.
 
 ##### Example
 ```js
-const random = new XorWow(123456789, 362436069, 521288629, 88675123, 5783321, 6615241, 362437);
+const random = new XORWow(123456789, 362436069, 521288629, 88675123, 5783321, 6615241, 362437);
 ```
 
 ---

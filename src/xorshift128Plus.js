@@ -1,4 +1,4 @@
-import PRNG64 from './prng64.js';
+import PRNG64 from './PRNG64.js';
 import { MAX53 } from './constants.js';
 
 class XORShift128Plus extends PRNG64 {

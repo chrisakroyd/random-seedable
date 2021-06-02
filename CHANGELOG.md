@@ -1,12 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [1.0.3] - Additional Generators (-)
+## [1.0.3] - Additional Generators, bug fixes, 53/64 bit output. (02/06/2021)
 
 ### Added
+- Added XorShift64 generator.
 - Added XorShift128 generator.
+- Added XorShift128+ generator.
+- Added PRNG64 class for common 64 bit output code.
+- Additional testing for 64 bit output.
 
 ### Changed
+- Fixed randRange() maximum number output.
+- Changed default generator to use XORShift64.
+- More in-depth testing.
 
 ## [1.0.2] - ESLint, smaller package size (21/05/2021)
 
