@@ -79,7 +79,7 @@ Supported PRNGs and their default initialisations.
 | [XORShift128](#XORShift128)   | ```new XORShift128(Date.now(), 362436069, 521288629, 88675123);``` | 32 bit |
 | [XORShift128Plus](#XORShift128Plus)   | ```new XORShift128Plus(Date.now(), 362436069);``` | 64 bit |
 | [XORWow](#XORWow)   | ```new XORWow(Date.now(), 362436069, 521288629, 88675123, 5783321, 6615241, 362437);``` | 32 bit |
-| [random](#random)   | ```default PRNG, same as XorWow``` | 64 bit |
+| [random](#XORShift64)   | ```default PRNG, same as XorShift64``` | 64 bit |
 
 ### PRNG methods.
 
