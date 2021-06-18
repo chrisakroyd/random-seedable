@@ -1,0 +1,10 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+# Normalisation can cause problems to these, leave alone.
+*.jpg		-text
+*.jpeg		-text
+*.png		-text
+*.gif		-text
+*.bmp		-text
+*.pdf		-text
+*.svg		-text
