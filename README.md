@@ -1,6 +1,7 @@
 # random-seedable
 [![Coverage Status](https://coveralls.io/repos/github/chrisakroyd/random-seedable/badge.svg?branch=main)](https://coveralls.io/github/chrisakroyd/random-seedable?branch=main)
 [![npm version](https://badge.fury.io/js/random-seedable.svg)](https://badge.fury.io/js/random-seedable)
+![npm](https://img.shields.io/npm/dm/random-seedable)
 
 Fully-fledged random number generator library offering both 32 bit and 64 bit high quality implementations of Xorshift, Xorwow, Mersenne Twister, PCG, and LCG.
 Each implements a standard API producing number distributions that exactly match the original implementations.
@@ -535,7 +536,7 @@ random.float53Array(size);
 ```
 
 # License
-See [LICENSE](https://github.com/ChristopherAkroyd/random-seedable/blob/master/LICENSE) file.
+See [LICENSE](https://github.com/ChrisAkroyd/random-seedable/blob/master/LICENSE) file.
 
 # Resources
 

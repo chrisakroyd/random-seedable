@@ -35,7 +35,7 @@
     "src": "src",
     "reference": "reference",
     "benchmark": "benchmark",
-    "example": "examples"
+    "examples": "examples"
   },
   "scripts": {
     "benchmark": "node benchmark/index.js",
@@ -52,7 +52,7 @@
   "bugs": {
     "url": "https://github.com/ChrisAkroyd/random-seedable/issues"
   },
-  "homepage": "https://github.com/ChrisAkroyd/random-seedable#readme",
+  "homepage": "https://github.com/ChrisAkroyd/random-seedable",
   "devDependencies": {
     "@istanbuljs/esm-loader-hook": "^0.1.2",
     "chai": "^4.3.4",
