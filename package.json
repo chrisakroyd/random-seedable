@@ -1,6 +1,6 @@
 {
   "name": "random-seedable",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Fully-fledged collection of both 32 and 64 bit seedable random number generators whose output precisely matches their original c/c++ implementations.",
   "keywords": [
     "Xorwow",
@@ -60,5 +60,14 @@
     "eslint-plugin-import": "^2.23.2",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0"
-  }
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    ".eslintrc",
+    ".gitignore",
+    "src/*.js",
+    "test/*.js"
+  ]
 }
