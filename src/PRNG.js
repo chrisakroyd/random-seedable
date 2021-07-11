@@ -34,6 +34,10 @@ class PRNG {
     return this.float() >= 0.5;
   }
 
+  coin(pTrue = 0.5) {
+    return this.float() < pTrue;
+  }
+
   int() {
     return Number(this._int());
   }
@@ -101,6 +105,10 @@ class PRNG {
 
   boolArray(size) {
     return this.initArray(size, () => this.bool());
+  }
+
+  coinArray(size, pTrue = 0.5) {
+    return this.initArray(size, () => this.coin(pTrue));
   }
 
   intArray(size) {

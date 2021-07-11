@@ -113,6 +113,24 @@ export const boolGenTestFn = (random, numDraws, tolerance = 50) => {
   });
 };
 
+export const coinTestFn = (random, numDraws, tolerance = 50) => {
+  describe('Generator produces coin flips with the required distribution.', () => {
+    it('Expect generator to produce a boolean from a coin flip', () => {
+      expect(random.coin()).to.satisfy((bool) => typeof bool === 'boolean');
+    });
+
+    const probability = 0.8;
+
+    it(`Expect ${numDraws} of coin() with probability ${probability} to produce an array
+             that is roughly ${probability} true and ${1 - probability} false`, () => {
+      const trues = random.coinArray(numDraws, probability).reduce((accumulator, currentValue) => accumulator + currentValue);
+      const falses = numDraws - trues;
+      expect(trues).to.be.greaterThanOrEqual((Math.round(numDraws * probability)) - tolerance);
+      expect(falses).to.be.lessThanOrEqual((Math.round(numDraws * (1 - probability))) + tolerance);
+    });
+  });
+};
+
 export const seedChangeTestFn = (random, seed, data1, data2) => {
   describe('Generator should generate two different but exact sequences after seed change.', () => {
     it('Should produce exact number sequences after reseeding.', () => {
@@ -294,6 +312,9 @@ export const testRunner = ({
 
   // Test that generator actually produces bools.
   boolGenTestFn(generator(seeds[0]), numDraws);
+
+  // Test for coin flip generation.
+  coinTestFn(generator(seeds[0]), numDraws);
 
   // Test that generator actually produces floats.
   floatGenTestFn(generator(seeds[0]), numDraws);

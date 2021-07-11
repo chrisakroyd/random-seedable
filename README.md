@@ -88,21 +88,23 @@ Each PRNG has the following methods.
 
 | Method      | Parameters | Return |
 | ----------- | --------   | ------ |
-| [bool()](#bool)   | `None`     | Boolean. |
-| [int()](#int)  | `None`     | Number. |
-| [bigInt()](#bigint)  | `None`     | BigInt. |
-| [float()](#float)   | `None`     | Float. |
-| [float53()](#float53) | `None`     | Float spread over full range. |
-| [randRange(min, max)](#randrange) | `min:Number, max:Number`     | min <= Number <= max |
-| [randBelow(max)](#randbelow) | `max:Number`     | Number <= Max |
-| [choice(array)](#choice) | `array:[?]`     | Item from array of type ? |
-| [shuffle(array, inPlace = true)](#shuffle) | `array:[?], inPlace:Boolean`     | Shuffled Array[?]  |
-| [boolArray(size)]() | `size:Number`     |Array[Boolean] of length size.  |
-| [intArray(size)]() | `size:Number`     | Array[Number] of length size.  |
-| [bigIntArray(size)]() | `size:Number`     | Array[BigInt] of length size.  |
-| [randRangeArray(size, min, max)]() | `size:Number, min:Number, max:Number`     | Array[Number] of length size filled w/ min <= num <= max.  |
-| [floatArray(size)]() | `size:Number`     | Array[Number] between 0.0 - 1.0 of length size.  |
-| [float53Array(size)]() | `size:Number`     | Array[Number] between 0.0 - 1.0 of length size.  |
+| [.bool()](#bool)   | `None`     | Boolean. |
+| [.coin(pTrue)](#coin)   | `pTrue:Number`     | Boolean. |
+| [.int()](#int)  | `None`     | Number. |
+| [.bigInt()](#bigint)  | `None`     | BigInt. |
+| [.float()](#float)   | `None`     | Float. |
+| [.float53()](#float53) | `None`     | Float spread over full range. |
+| [.randRange(min, max)](#randrange) | `min:Number, max:Number`     | min <= Number <= max |
+| [.randBelow(max)](#randbelow) | `max:Number`     | Number <= Max |
+| [.choice(array)](#choice) | `array:[?]`     | Item from array of type ? |
+| [.shuffle(array, inPlace = true)](#shuffle) | `array:[?], inPlace:Boolean`     | Shuffled Array[?]  |
+| [.boolArray(size)](#boolarray) | `size:Number`     |Array[Boolean] of length size.  |
+| [.coinArray(size, pTrue)](#coinarray) | `size:Number, pTrue:Number`     |Array[Boolean] of length size.  |
+| [.intArray(size)](#intarray) | `size:Number`     | Array[Number] of length size.  |
+| [.bigIntArray(size)](#bigintarray) | `size:Number`     | Array[BigInt] of length size.  |
+| [.randRangeArray(size, min, max)](#rangerangearray) | `size:Number, min:Number, max:Number`     | Array[Number] of length size filled w/ min <= num <= max.  |
+| [.floatArray(size)](#floatarray) | `size:Number`     | Array[Number] between 0.0 - 1.0 of length size.  |
+| [.float53Array(size)](#float53array) | `size:Number`     | Array[Number] between 0.0 - 1.0 of length size.  |
 
 ## Full Documentation
 
@@ -256,7 +258,9 @@ const random = new XORWow(123456789, 362436069, 521288629, 88675123, 5783321, 66
 ---
 
 ### bool
-`random.bool()` Generates a boolean with the formula random.float() >= 0.5
+`random.bool()`
+
+Generates a boolean with the formula random.float() >= 0.5
 
 
 ##### Parameters
@@ -273,8 +277,32 @@ random.bool(); // true
 
 ---
 
+### coin
+`random.coin(pTrue)`
+
+Generates a random boolean with probability of it being true denoted by the pTrue parameter. For
+example, when pTrue=0.8, 80% of the numbers generated with this method will be true.
+
+
+##### Parameters
+- pTrue -> Probability of generating a true value.
+
+##### Returns
+Boolean True/False.
+
+##### Example
+
+```js
+random.coin(0.8); // true
+```
+
+
+---
+
 ### int
-`random.int()` Generates and returns the next number in the PRNGs sequence.
+`random.int()`
+
+Generates and returns the next number in the PRNGs sequence.
 
 
 ##### Parameters
@@ -292,7 +320,9 @@ random.int(); // 85424123
 ---
 
 ### bigInt
-`random.bigInt()` Generates and returns the next number in the PRNGs sequence and returns it as a Bigint.
+`random.bigInt()`
+
+Generates and returns the next number in the PRNGs sequence and returns it as a Bigint.
 
 ##### Parameters
 None.
@@ -310,7 +340,9 @@ random.bigInt(); // 85424123n
 ---
 
 ### float
-`random.float()` Generates a random floating point number.
+`random.float()`
+
+Generates a random floating point number.
 
 ##### Parameters
 None.
@@ -327,7 +359,9 @@ random.float(); // 0.234242
 ---
 
 ### float53
-`random.float53()` Generates a random floating point number.
+`random.float53()`
+
+Generates a random floating point number.
 
 ##### Parameters
 None.
@@ -344,7 +378,9 @@ random.float53(); // 0.2342422341231
 ---
 
 ### randRange
-`random.randRange(min, max)` Generates a number within the given range.
+`random.randRange(min, max)`
+
+Generates a number within the given range.
 
 ##### Parameters
 - min -> Lower bound of the numbers to generate (inclusive).
@@ -364,7 +400,9 @@ random.randRange(lowerBound, upperBound); // 36.
 ---
 
 ### randBelow
-`random.randBelow(max)` Generates a number below the given maximum.
+`random.randBelow(max)`
+
+Generates a number below the given maximum.
 
 ##### Parameters
 - max -> Upper bound of the numbers to generate (inclusive).
@@ -382,7 +420,9 @@ random.randBelow(upperBound);  // 285.
 ---
 
 ### choice
-`random.choice(array)` Picks a random element from the array.
+`random.choice(array)`
+
+Picks a random element from the array.
 
 ##### Parameters
 - array -> Array of any type from which to pick random number.
@@ -400,7 +440,9 @@ random.choice(arr); // 4
 ---
 
 ### shuffle
-`random.shuffle(array, inPlace = false)` Randomly shuffles the given array using the fisher-yates algorithm.
+`random.shuffle(array, inPlace = false)`
+
+Randomly shuffles the given array using the fisher-yates algorithm.
 
 ##### Parameters
 - array -> Array of any type to be shuffled.
@@ -427,7 +469,9 @@ console.log(shuffled); // [4, 2, 3, 1]
 ---
 
 ### boolArray
-`random.boolArray(size)` Generates an n size array populated with booleans.
+`random.boolArray(size)`
+
+Generates an n size array populated with booleans.
 
 ##### Parameters
 - size -> Size of the array to generate.
@@ -444,8 +488,34 @@ random.boolArray(size);
 
 ---
 
+### coinArray
+`random.coinArray(size, pTrue)`
+
+Generates an n size array of random booleans with probability of it being true denoted by the pTrue parameter. For
+example, when pTrue=0.8, 80% of the numbers in the generated array will be true.
+
+
+##### Parameters
+- size -> Size of the array to generate.
+- pTrue -> Probability of generating a true value.
+
+##### Returns
+Array[Boolean] of length size.
+
+##### Example
+
+```js
+const size = 256;
+const pTrue = 0.8;
+random.coinArray(size, pTrue);
+```
+
+---
+
 ### intArray
-`random.intArray(size)` Generates an n size array populated with integers.
+`random.intArray(size)`
+
+Generates an n size array populated with integers.
 
 ##### Parameters
 - size -> Size of the array to generate.
@@ -463,7 +533,9 @@ random.intArray(size);
 ---
 
 ### bigIntArray
-`random.bigIntArray(size)` Generates an n size array populated with BigInts.
+`random.bigIntArray(size)`
+
+Generates an n size array populated with BigInts.
 
 ##### Parameters
 - size -> Size of the array to generate.
@@ -481,7 +553,9 @@ random.bigIntArray(size);
 ---
 
 ### rangeRangeArray
-`random.randRangeArray(size, min, max)` Generates an n size array populated within the given range.
+`random.randRangeArray(size, min, max)`
+
+Generates an n size array populated within the given range.
 
 ##### Parameters
 - size -> Size of the array to generate.
@@ -503,7 +577,9 @@ random.randRangeArray(size, lowerBound, upperBound);
 ---
 
 ### floatArray
-`random.floatArray(size)` Generates an n size array populated with floats.
+`random.floatArray(size)`
+
+Generates an n size array populated with floats.
 
 ##### Parameters
 - size -> Size of the array to generate.
@@ -520,7 +596,9 @@ random.floatArray(size);
 ---
 
 ### float53Array
-`random.float53Array(size)` Generates an n size array populated with floats.
+`random.float53Array(size)`
+
+Generates an n size array populated with floats.
 
 ##### Parameters
 - size -> Size of the array to generate.

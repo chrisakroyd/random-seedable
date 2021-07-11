@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - coin flip function. (11/07/2021)
+
+### Added
+- .coin(pTrue); method on each generator that generates a true flip with the given
+  probability of occurring.
+
+### Changed
+- Added new documentation for .coin(pTrue) method.
+- Fixed bad links for array generation methods.
+
 ## [1.0.3] - Additional Generators, bug fixes, 53/64 bit output. (02/06/2021)
 
 ### Added
