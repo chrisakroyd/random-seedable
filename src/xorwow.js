@@ -1,7 +1,33 @@
 import PRNG from './PRNG.js';
 import { MAX32 } from './constants.js';
 
+/**
+ * XorWow is an improved version of XorShift and default generator of Nvidia CUDA. 32 bits of output.
+ *
+ * @example
+ * const random = new XORWow(123456789, 362436069, 521288629, 88675123, 5783321, 6615241, 362437);
+ *
+ * @class
+ * @extends {PRNG}
+ * @param {number | BigInt} seed -> Initial seed.
+ * @param {number | BigInt} y -> First state initial value.
+ * @param {number | BigInt} z -> Second state initial value.
+ * @param {number | BigInt} w -> Third state initial value.
+ * @param {number | BigInt} v -> Fourth state initial value.
+ * @param {number | BigInt} d -> Fifth state initial value.
+ * @param {number | BigInt} weyl -> Additive counter.
+ */
 class XORWow extends PRNG {
+  /**
+   * @constructor
+   * @param {number | BigInt} seed -> Initial seed.
+   * @param {number | BigInt} y -> First state initial value.
+   * @param {number | BigInt} z -> Second state initial value.
+   * @param {number | BigInt} w -> Third state initial value.
+   * @param {number | BigInt} v -> Fourth state initial value.
+   * @param {number | BigInt} d -> Fifth state initial value.
+   * @param {number | BigInt} weyl -> Additive counter.
+   */
   constructor(seed = Date.now(), y = 362436069, z = 521288629, w = 88675123,
     v = 5783321, d = 6615241, weyl = 362437) {
     super(MAX32, BigInt(seed));
@@ -21,15 +47,30 @@ class XORWow extends PRNG {
     };
   }
 
+  /**
+   * Resets the generator to its original state.
+   */
   reset() {
     this.x = this.seed;
     Object.assign(this, this.origParams);
   }
 
+  /**
+   * Seed getter.
+   *
+   * @public
+   * @returns {number | BigInt} Retrieves seed.
+   */
   get seed() {
     return this._seed;
   }
 
+  /**
+   * Converts seed into BigInt + takes steps to reset generator.
+   *
+   * @public
+   * @param {number | BigInt} seed -> New seed to set.
+   */
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 32);
     this.reset();

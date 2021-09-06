@@ -1,7 +1,24 @@
 import PRNG64 from './PRNG64.js';
 import { MAX53 } from './constants.js';
 
+/**
+ * XorShift generators are fast, efficient generators with good randomness quality.
+ * 64 bits of output with 128 internal state.
+ *
+ * @example
+ * const random = new XORShift128Plus(Date.now(), 362436069);
+ *
+ * @class
+ * @extends {PRNG64}
+ * @param {number | BigInt} seed -> Initial seed.
+ * @param {number | BigInt} y -> Second seed.
+ */
 class XORShift128Plus extends PRNG64 {
+  /**
+   * @constructor
+   * @param {number | BigInt} seed -> Initial seed.
+   * @param {number | BigInt} y -> Second seed.
+   */
   constructor(seed = Date.now(), y = 362436069) {
     super(MAX53, seed);
     this.seed = seed;
@@ -9,15 +26,30 @@ class XORShift128Plus extends PRNG64 {
     this.origParams = { y: this.y };
   }
 
+  /**
+   * Resets the generator to its original state.
+   */
   reset() {
     this.x = this.seed;
     Object.assign(this, this.origParams);
   }
 
+  /**
+   * Seed getter.
+   *
+   * @public
+   * @returns {number | BigInt} Retrieves seed.
+   */
   get seed() {
     return this._seed;
   }
 
+  /**
+   * Converts seed into BigInt + takes steps to reset generator.
+   *
+   * @public
+   * @param {number | BigInt} seed -> New seed to set.
+   */
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 64);
     this.reset();

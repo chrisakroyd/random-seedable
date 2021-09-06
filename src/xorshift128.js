@@ -1,7 +1,28 @@
 import PRNG from './PRNG.js';
 import { MAX32 } from './constants.js';
 
+/**
+ * XorShift generators are fast, efficient generators with good randomness quality. This implementation
+ * has 32 bit output with 128 bits of internal state.
+ *
+ * @example
+ * const random = new XORShift128(Date.now(), 362436069, 521288629, 88675123);
+ *
+ * @class
+ * @extends {PRNG}
+ * @param {number | BigInt} seed -> Initial seed.
+ * @param {number | BigInt} y -> First bit shift parameter.
+ * @param {number | BigInt} z -> Second bit shift parameter.
+ * @param {number | BigInt} w -> Third bit shift parameter.
+ */
 class XORShift128 extends PRNG {
+  /**
+   * @constructor
+   * @param {number | BigInt} seed -> Initial seed.
+   * @param {number | BigInt} y -> First bit shift parameter.
+   * @param {number | BigInt} z -> Second bit shift parameter.
+   * @param {number | BigInt} w -> Third bit shift parameter.
+   */
   constructor(seed = Date.now(), y = 362436069, z = 521288629, w = 88675123) {
     super(MAX32, BigInt(seed));
     this.seed = seed;
@@ -13,15 +34,30 @@ class XORShift128 extends PRNG {
     };
   }
 
+  /**
+   * Resets the generator to its original state.
+   */
   reset() {
     this.x = this.seed;
     Object.assign(this, this.origParams);
   }
 
+  /**
+   * Seed getter.
+   *
+   * @public
+   * @returns {number | BigInt} Retrieves seed.
+   */
   get seed() {
     return this._seed;
   }
 
+  /**
+   * Converts seed into BigInt + takes steps to reset generator.
+   *
+   * @public
+   * @param {number | BigInt} seed -> New seed to set.
+   */
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 32);
     this.reset();

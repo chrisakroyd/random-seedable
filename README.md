@@ -129,7 +129,7 @@ const random = new LCG(1234, 1664525, 1013904223, 4294967296);
 
 ### PCG
 
-Permuted Congruential Generator (LCG) is again, a relatively simple generator that improves on the qualites
+Permuted Congruential Generator (PCG) is again, a relatively simple generator that improves on the qualites
 of LCG by improving its randomness quality by increasing its state size and using only the most significant bits
 to produce the output. 32 bits of output.
 
@@ -425,7 +425,7 @@ random.randBelow(upperBound);  // 285.
 Picks a random element from the array.
 
 ##### Parameters
-- array -> Array of any type from which to pick random number.
+- array -> Array of any type from which we randomly select one item.
 
 ##### Returns
 A singular item from the array of type ?.
@@ -450,7 +450,7 @@ Randomly shuffles the given array using the fisher-yates algorithm.
 
 ##### Returns
 
-array input shuffled if inPlace ==== false, shuffled new array object if inPlace === true.
+Array shuffled (inPlace === false), shuffled copy of array (inPlace === true).
 
 ##### Examples
 
@@ -535,7 +535,7 @@ random.intArray(size);
 ### bigIntArray
 `random.bigIntArray(size)`
 
-Generates an n size array populated with BigInts.
+Generates an n size array populated with Big Integers.
 
 ##### Parameters
 - size -> Size of the array to generate.
