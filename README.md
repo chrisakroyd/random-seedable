@@ -4,7 +4,7 @@
 ![npm](https://img.shields.io/npm/dm/random-seedable)
 
 Fully-fledged random number generator library offering both 32 bit and 64 bit high quality implementations of Xorshift, Xorwow, Mersenne Twister, PCG, and LCG.
-Each implements a standard API producing number distributions that exactly match the original implementations.
+Each implements a standard API producing number distributions that exactly match the original implementations. Typescript compatible.
 
 ## Highlights
 

@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - Typescript Compatability (06/09/2021)
+
+### Added
+- Typescript declaration file generation from jsdoc.
+
+### Changed
+- Fixed bad documentation
+
 ## [1.0.6] - coin flip function. (11/07/2021)
 
 ### Added
