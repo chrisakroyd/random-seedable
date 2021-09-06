@@ -10,18 +10,18 @@ import { MAX53 } from './constants.js';
  *
  * @class
  * @extends {PRNG64}
- * @param {number | BigInt} seed -> Initial seed.
- * @param {number | BigInt} a -> First bit shift parameter.
- * @param {number | BigInt} b -> Second bit shift parameter.
- * @param {number | BigInt} c -> Third bit shift parameter.
+ * @param {number | bigint} seed -> Initial seed.
+ * @param {number | bigint} a -> First bit shift parameter.
+ * @param {number | bigint} b -> Second bit shift parameter.
+ * @param {number | bigint} c -> Third bit shift parameter.
  */
 class XORShift64 extends PRNG64 {
   /**
    * @constructor
-   * @param {number | BigInt} seed -> Initial seed.
-   * @param {number | BigInt} a -> First bit shift parameter.
-   * @param {number | BigInt} b -> Second bit shift parameter.
-   * @param {number | BigInt} c -> Third bit shift parameter.
+   * @param {number | bigint} seed -> Initial seed.
+   * @param {number | bigint} a -> First bit shift parameter.
+   * @param {number | bigint} b -> Second bit shift parameter.
+   * @param {number | bigint} c -> Third bit shift parameter.
    */
   constructor(seed = Date.now(), a = 13, b = 7, c = 17) {
     super(MAX53, BigInt(seed));
@@ -54,7 +54,7 @@ class XORShift64 extends PRNG64 {
    * Seed getter.
    *
    * @public
-   * @returns {number | BigInt} Retrieves seed.
+   * @returns {number | bigint} Retrieves seed.
    */
   get seed() {
     return this._seed;
@@ -64,7 +64,7 @@ class XORShift64 extends PRNG64 {
    * Converts seed into BigInt + takes steps to reset generator.
    *
    * @public
-   * @param {number | BigInt} seed -> New seed to set.
+   * @param {number | bigint} seed -> New seed to set.
    */
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 64);

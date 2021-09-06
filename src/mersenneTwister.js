@@ -1,11 +1,11 @@
 import PRNG from './PRNG.js';
 import { MAX32 } from './constants.js';
 
-/** @type {BigInt} */
+/** @type {bigint} */
 const MATRIX_A = 0x9908b0dfn; /* constant vector a */
-/** @type {BigInt} */
+/** @type {bigint} */
 const UPPER_MASK = 0x80000000n; /* most significant w-r bits */
-/** @type {BigInt} */
+/** @type {bigint} */
 const LOWER_MASK = 0x7fffffffn; /* least significant r bits */
 
 // https://github.com/boo1ean/mersenne-twister/blob/master/src/mersenne-twister.js
@@ -22,16 +22,16 @@ const LOWER_MASK = 0x7fffffffn; /* least significant r bits */
  *
  * @class
  * @extends {PRNG}
- * @param {number | BigInt} seed -> Initial seed.
- * @param {number | BigInt} n -> Degree of recurrence.
- * @param {number | BigInt} m -> Middle word, offset used during recurrence.
+ * @param {number | bigint} seed -> Initial seed.
+ * @param {number | bigint} n -> Degree of recurrence.
+ * @param {number | bigint} m -> Middle word, offset used during recurrence.
  */
 class MersenneTwister extends PRNG {
   /**
    * @constructor
-   * @param {number | BigInt} seed -> Initial seed.
-   * @param {number | BigInt} n -> Degree of recurrence.
-   * @param {number | BigInt} m -> Middle word, offset used during recurrence.
+   * @param {number | bigint} seed -> Initial seed.
+   * @param {number | bigint} n -> Degree of recurrence.
+   * @param {number | bigint} m -> Middle word, offset used during recurrence.
    */
   constructor(seed = Date.now(), n = 624, m = 397) {
     super(MAX32, BigInt(seed));
@@ -58,7 +58,7 @@ class MersenneTwister extends PRNG {
    * Seed getter.
    *
    * @public
-   * @returns {number | BigInt} Retrieves seed.
+   * @returns {number | bigint} Retrieves seed.
    */
   get seed() {
     return this._seed;
@@ -68,7 +68,7 @@ class MersenneTwister extends PRNG {
    * Converts seed into BigInt + takes steps to reset generator.
    *
    * @public
-   * @param {number | BigInt} seed -> New seed to set.
+   * @param {number | bigint} seed -> New seed to set.
    */
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 32);
@@ -87,9 +87,9 @@ class MersenneTwister extends PRNG {
 
   /**
    * @private
-   * @param {BigInt} u
-   * @param {BigInt} v
-   * @returns {BigInt}
+   * @param {bigint} u
+   * @param {bigint} v
+   * @returns {bigint}
    */
   mixBits(u, v) {
     return (((u) & UPPER_MASK) | ((v) & LOWER_MASK));
@@ -98,9 +98,9 @@ class MersenneTwister extends PRNG {
   /**
    * Computes the twist function.
    * @private
-   * @param {BigInt} u
-   * @param {BigInt} v
-   * @returns {BigInt}
+   * @param {bigint} u
+   * @param {bigint} v
+   * @returns {bigint}
    */
   twist(u, v) {
     return ((this.mixBits(u, v) >> 1n) ^ ((v) & 1n ? MATRIX_A : 0n));

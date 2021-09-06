@@ -10,18 +10,18 @@ import { MAX32 } from './constants.js';
  *
  * @class
  * @extends {PRNG}
- * @param {number | BigInt} seed -> Initial seed.
- * @param {number | BigInt} y -> First bit shift parameter.
- * @param {number | BigInt} z -> Second bit shift parameter.
- * @param {number | BigInt} w -> Third bit shift parameter.
+ * @param {number | bigint} seed -> Initial seed.
+ * @param {number | bigint} y -> First bit shift parameter.
+ * @param {number | bigint} z -> Second bit shift parameter.
+ * @param {number | bigint} w -> Third bit shift parameter.
  */
 class XORShift128 extends PRNG {
   /**
    * @constructor
-   * @param {number | BigInt} seed -> Initial seed.
-   * @param {number | BigInt} y -> First bit shift parameter.
-   * @param {number | BigInt} z -> Second bit shift parameter.
-   * @param {number | BigInt} w -> Third bit shift parameter.
+   * @param {number | bigint} seed -> Initial seed.
+   * @param {number | bigint} y -> First bit shift parameter.
+   * @param {number | bigint} z -> Second bit shift parameter.
+   * @param {number | bigint} w -> Third bit shift parameter.
    */
   constructor(seed = Date.now(), y = 362436069, z = 521288629, w = 88675123) {
     super(MAX32, BigInt(seed));
@@ -46,7 +46,7 @@ class XORShift128 extends PRNG {
    * Seed getter.
    *
    * @public
-   * @returns {number | BigInt} Retrieves seed.
+   * @returns {number | bigint} Retrieves seed.
    */
   get seed() {
     return this._seed;
@@ -56,7 +56,7 @@ class XORShift128 extends PRNG {
    * Converts seed into BigInt + takes steps to reset generator.
    *
    * @public
-   * @param {number | BigInt} seed -> New seed to set.
+   * @param {number | bigint} seed -> New seed to set.
    */
   set seed(seed) {
     this._seed = this.cast(BigInt(seed), 32);

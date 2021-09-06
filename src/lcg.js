@@ -41,7 +41,7 @@ class LCG extends PRNG {
    * Seed getter.
    *
    * @public
-   * @returns {number|BigInt} Retrieves seed.
+   * @returns {number | bigint} Retrieves seed.
    */
   get seed() {
     return this._seed;
@@ -49,7 +49,7 @@ class LCG extends PRNG {
 
   /**
    * Converts seed into BigInt + takes steps to reset generator.
-   * @param {number | BigInt} seed -> New seed to set.
+   * @param {number | bigint} seed -> New seed to set.
    */
   set seed(seed) {
     this._seed = seed;
