@@ -2,6 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/chrisakroyd/random-seedable/badge.svg?branch=main)](https://coveralls.io/github/chrisakroyd/random-seedable?branch=main)
 [![npm version](https://badge.fury.io/js/random-seedable.svg)](https://badge.fury.io/js/random-seedable)
 ![npm](https://img.shields.io/npm/dm/random-seedable)
+![minzip](https://badgen.net/bundlephobia/minzip/random-seedable)
 
 Fully-fledged random number generator library offering both 32 bit and 64 bit high quality implementations of Xorshift, Xorwow, Mersenne Twister, PCG, and LCG.
 Each implements a standard API producing number distributions that exactly match the original implementations. Typescript compatible.
@@ -41,9 +42,9 @@ random.choice([1, 2, 3, 1, 4]); // 2
 Want a random generator with a seed you can set? Just import the generator you wish and initialise it yourself.
 
 ```js
-import { XorShift } from 'random-seedable';
+import { XORShift } from 'random-seedable';
 
-const random = new XorShift(123456789);
+const random = new XORShift(123456789);
 random.int(); // 123312
 random.bool(); // true
 random.shuffle([1, 2, 3, 1, 4]); // [2, 4, 3, 1, 1]
@@ -53,9 +54,9 @@ random.choice([1, 2, 3, 1, 4]); // 2
 Once the generator is initialised, the seed can be changed using the seed setter function.
 
 ```js
-import { XorShift } from 'random-seedable';
+import { XORShift } from 'random-seedable';
 
-const random = new XorShift(123456789);
+const random = new XORShift(123456789);
 
 console.log(random.seed); // 123456789
 
@@ -80,7 +81,7 @@ Supported PRNGs and their default initialisations.
 | [XORShift128](#XORShift128)   | ```new XORShift128(Date.now(), 362436069, 521288629, 88675123);``` | 32 bit |
 | [XORShift128Plus](#XORShift128Plus)   | ```new XORShift128Plus(Date.now(), 362436069);``` | 64 bit |
 | [XORWow](#XORWow)   | ```new XORWow(Date.now(), 362436069, 521288629, 88675123, 5783321, 6615241, 362437);``` | 32 bit |
-| [random](#XORShift64)   | ```default PRNG, same as XorShift64``` | 64 bit |
+| [random](#XORShift64)   | ```default PRNG, same as XORShift64``` | 64 bit |
 
 ### PRNG methods.
 
