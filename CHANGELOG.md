@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - Typescript Compatability (01/10/2021)
+
+### Changed
+- Fixed bad documentation
+
 ## [1.0.7] - Typescript Compatability (06/09/2021)
 
 ### Added
