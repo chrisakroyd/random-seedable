@@ -177,10 +177,11 @@ declare class PRNG {
      * random.choice(arr); // 4
      *
      * @public
-     * @param {any[]} array -> Array of any type from which we randomly select one item.
-     * @returns {any} A single item from the array of type ?.
+     * @template T
+     * @param {T[]} array -> Array of any type from which we randomly select one item.
+     * @returns {T} A single item from the array of type ?.
      */
-    public choice(array: any[]): any;
+    public choice<T>(array: T[]): T;
     /**
      * Randomly shuffles the given array using the fisher-yates algorithm.
      *
@@ -200,11 +201,12 @@ declare class PRNG {
      * console.log(shuffled); // [4, 2, 3, 1]
      *
      * @public
-     * @param {any[]} array -> Array of any type to be shuffled.
+     * @template T
+     * @param {T[]} array -> Array of any type to be shuffled.
      * @param {boolean} inPlace -> Shuffle the array (true) or shuffle a copy of array (false).
-     * @returns {any[]} Array shuffled (inPlace === false), shuffled copy of array (inPlace === true).
+     * @returns {T[]} Array shuffled (inPlace === false), shuffled copy of array (inPlace === true).
      */
-    public shuffle(array: any[], inPlace?: boolean): any[];
+    public shuffle<T>(array: T[], inPlace?: boolean): T[];
     /**
      * Creates an array of the given size populated with the result of the mapFn.
      *
